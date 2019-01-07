@@ -16,7 +16,8 @@
 ##'
 ##' @import triangle
 ##' @import plotly
-##' @import cooptrees
+##' @import kappalab
+##' @import GameTheory
 ##'
 ##'
 ##' @importFrom  graphics hist legend lines plot points segments

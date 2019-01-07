@@ -19,12 +19,12 @@
 #' @examples
 #'
 #' precedence<-matrix(c(0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
-#' distribution<-c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE")
-#' values<-matrix(c(1,3,2,1/2,3/2,1,1/4,9/4,1/2,3,5,4,0,4,2),nrow=5,byrow=TRUE)
+#' distribution<-c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","EXPONENTIAL")
+#' values<-matrix(c(1,3,2,1/2,3/2,1,1/4,9/4,1/2,3,5,4,1/2,0,0),nrow=5,byrow=TRUE)
 #' observed.duration<-c(2.5,1.25,2,4.5,3)
 #' percentile<-NULL
 #' delta<-6.5
-#' delay.stochastic.pert(precedence,distribution,values,observed.duration,percentile,delta)
+#' delay.stochastic.pert(precedence,distribution,values,observed.duration,percentile,delta,10000)
 #'
 
 delay.stochastic.pert<-function(precedence,distribution,values,observed.duration,percentile=NULL,delta=NULL,compilations=1000){
@@ -189,7 +189,7 @@ delay.stochastic.pert<-function(precedence,distribution,values,observed.duration
   p<-n+1
 
   for(j in 2:n){
-    con<-combn(c(1:n),j)
+    con<-as.matrix(combn(c(1:n),j))
 
     for(z in 1:dim(con)[2]){
 
@@ -208,7 +208,12 @@ delay.stochastic.pert<-function(precedence,distribution,values,observed.duration
     }
   }
 
-  sh<-c(shapleyValue(n,v=v)$value)
+  #sh<-c(shapleyValue(n,v=v)$value)
+
+  z<-as.matrix(DefineGame(n,v)$Lex)
+  z<-as.vector(z)
+  coalitions <- set.func(c(0, z))
+  sh <- Shapley.value(coalitions)
 }
 
 
@@ -219,7 +224,7 @@ delay.stochastic.pert<-function(precedence,distribution,values,observed.duration
     if(continue=="Y"){
     A<-matrix(c(sh[or1]),ncol=n,byrow=TRUE)
     colnames(A)=c(activities)
-    rownames(A)=c("Shapley Value :  ")
+    rownames(A)=c("Stochastic Shapley rule :  ")
     return(round(A,5))
     }
     else{

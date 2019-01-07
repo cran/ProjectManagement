@@ -121,8 +121,9 @@ delay.pert<-function(duration,precedence,observed.duration,delta=NULL){
         v[1:n]<-SD[1:n]
         continue<-"Y"
         p<-n+1
+
         for(j in 2:n){
-          con<-combn(c(1:n),j)
+          con<-as.matrix(combn(c(1:n),j))
           for(z in 1:dim(con)[2]){
 
             duracion1<-duration
@@ -138,9 +139,16 @@ delay.pert<-function(duration,precedence,observed.duration,delta=NULL){
         }
 
         v<-pmax(v-tiempo,0)
-        sh<-c(shapleyValue(n,v=v)$value)
 
-      }
+        #sh<-c(shapleyValue(n,v=v)$value)
+
+        z<-as.matrix(DefineGame(n,v)$Lex)
+        z<-as.vector(z)
+        coalitions <- set.func(c(0, z))
+        sh <- Shapley.value(coalitions)
+
+
+        }
     }
 
 
@@ -148,14 +156,14 @@ delay.pert<-function(duration,precedence,observed.duration,delta=NULL){
       if(continue=="Y"){
         A<-matrix(c(Prop[or1],TProp[or1],sh[or1]),ncol=length(activities),byrow=TRUE)
         colnames(A)=c(activities)
-        rownames(A)=c("The proportional payment by activity is ","The truncaded proportional payment  by activity is ", "Shapley rule")
+        rownames(A)=c("The proportional payment by activity is ","The truncated proportional payment  by activity is ", "Shapley rule")
         cat(" ","\n")
         return(round(A,5))
       }
       else{
         A<-matrix(c(Prop[or1],TProp[or1]),ncol=length(activities),byrow=TRUE)
         colnames(A)=c(activities)
-        rownames(A)=c("The proportional payment by activity is ","The truncaded proportional payment  by activity is ")
+        rownames(A)=c("The proportional payment by activity is ","The truncated proportional payment  by activity is ")
         cat(" ","\n")
         return(round(A,5))
       }
