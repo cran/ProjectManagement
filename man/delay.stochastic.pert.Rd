@@ -4,21 +4,26 @@
 \alias{delay.stochastic.pert}
 \title{Problems of distribution of delay in stochastic projects}
 \usage{
-delay.stochastic.pert(precedence, distribution, values, observed.duration,
-  percentile = NULL, delta = NULL, compilations = 1000)
+delay.stochastic.pert(prec1and2 = matrix(0), prec3and4 = matrix(0),
+  distribution, values, observed.duration, percentile = NULL, delta = NULL,
+  cost.function = NULL, compilations = 1000)
 }
 \arguments{
-\item{precedence}{A matrix that indicates the order of precedence between activities. If the value \eqn{(i,j)} is equal to 1 then \eqn{i} precedes \eqn{j}.}
+\item{prec1and2}{A matrix indicating the order of precedence type 1 and 2 between the activities (Default=matrix(0)). If value \eqn{(i,j)=1} then activity \eqn{i} precedes type \eqn{1} to \eqn{j}, and if \eqn{(i,j)=2} then activity \eqn{i} precedes type \eqn{2} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.}
 
-\item{distribution}{Type of distribution that each activities' initial duration has. It can be NORMAL, TRIANGLE, EXPONENTIAL, UNIFORM and EMPIRICAL.}
+\item{prec3and4}{A matrix indicating the order of precedence type 3 and 4 between the activities (Default=matrix(0)). If value \eqn{(i,j)=3} then activity \eqn{i} precedes type \eqn{3} to \eqn{j}, and if \eqn{(i,j)=4} then activity \eqn{i} precedes type \eqn{4} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.}
 
-\item{values}{Matrix with the parameters corresponding to the distribution associated with the duration for each activity. Considering i as an activity we have the following cases. If the distribution is TRIANGLE, then (i, 1) it is the minimum value, (i, 2) the maximum value and (i, 3) the mode. If the distribution is NORMAL, (i, 1) is the mean and (i, 2) the variance. If the distribution is EXPONENTIAL, then (i, 1) is the \eqn{\lambda} parameter. If the distribution is UNIFORM, (i, 1) it is the minimum value and (i, 2) the maximum value. Finally, if the distribution is EMPIRICAL, then (i,j), for all \eqn{j\in \{1,...,M\}} such that \eqn{M>0}, is the sample.}
+\item{distribution}{Type of distribution that each activities' duration has. It can be NORMAL, TRIANGLE, EXPONENTIAL, UNIFORM, T-STUDENT, FDISTRIBUTION, CHI-SQUARED, GAMMA, WEIBULL, BINOMIAL, POISSON, GEOMETRIC, HYPERGEOMETRIC and EMPIRICAL.}
+
+\item{values}{Matrix with the parameters corresponding to the distribution associated with the duration for each activity. Considering i as an activity we have the following cases. If the distribution is TRIANGLE, then (i, 1) it is the minimum value, (i, 2) the maximum value and (i, 3) the mode. If the distribution is NORMAL, (i, 1) is the mean and (i, 2) the variance. If the distribution is EXPONENTIAL, then (i, 1) is the \eqn{\lambda} parameter. If the distribution is UNIFORM, (i, 1) it is the minimum value and (i, 2) the maximum value. If the distribution is T-STUDENT, (i, 1) degrees of freedom and (i, 2) non-centrality parameter delta. In FDISTRIBUTION, (i, 1) and (i, 2) degrees of freedom and (i, 3) non-centrality parameter. In CHI-SQUARED, (i, 1) degrees of freedom and (i, 2) non-centrality parameter (non-negative). In GAMMA, (i, 1) and (i, 3) shape and scale parameters and (i, 2) an alternative way to specify the scale. In WEIBULL, (i, 1) and (i, 2) shape and scale parameters. In BINOMIAL, (i, 1) number of trials (zero or more) and (i, 2) probability of success on each trial. In POISSON, (i, 1) non-negative mean. In GEOMETRIC, (i, 1) probability of success in each trial, between 0 and 1. In HYPERGEOMETRIC, (i, 1) number of white balls in the urn, (i, 2) number of black balls in the urn and (i, 3) numer of balls drawn from the urn. Finally, if the distribution is EMPIRICAL, then (i,j), for all \eqn{j\in \{1,...,M\}} such that \eqn{M>0}, is the sample.}
 
 \item{observed.duration}{Vector with the observed duration for each activity.}
 
-\item{percentile}{Percentile used to calculate the maximum time allowed for the duration of the project (Default=NULL). Only percentile or delta is necessary.}
+\item{percentile}{Percentile used to calculate the maximum time allowed for the duration of the project (Default=NULL). Only percentile or delta is necessary. This value is only used if the function uses the default cost function.}
 
-\item{delta}{Maximum time allowed for the duration of the project (Default=NULL). Only delta or pencetile is necessary.}
+\item{delta}{Maximum time allowed for the duration of the project (Default=NULL). Only delta or pencetile is necessary. This value is only used if the function uses the default cost function.}
+
+\item{cost.function}{Delay costs function. If this value is not added, a default cost function will be used.}
 
 \item{compilations}{Number of compilations that the function will use for average calculations (Default=1000).}
 }
@@ -29,17 +34,23 @@ A delay value and solution vector.
 This function calculates the delay of a stochastic project, once it has been carried out. In addition, it also calculates the distribution of the delay on the different activities with the Stochastic Shapley rule.
 }
 \details{
-Given a problem of sharing delays in a stochastic project \eqn{(N,\prec,\{X_i\}_{i\in N},\{x_i\}_{i\in N})},  such that \eqn{\{X_i\}_{i\in N}} is the random variable of activities' duration and \eqn{\{x_i\}_{i\in N}} the observed value. It is defined as \eqn{E(D(N,\prec,\{X_i\}_{i\in N}))} the expected project time, where \eqn{E} is the mathematical expectation, and \eqn{D(N,\prec,\{x_i\}_{i\in N})} the observed project time, then \eqn{d=D(N,\prec,\{X_i\}_{i\in N})-\delta>0}, with \eqn{\delta>0}, is the delay. The Stochastic Shapley rule is based on the Shapley value for the TU game \eqn{(N,v)} where \eqn{v(S)=E(\max\{D(N,\prec,(\{X_i\}_{i\in N\backslash S},\{x_i\}_{i\in S}))-\delta,0\})}, for all \eqn{S\subseteq N}.  If the number of activities is greater than nine, the Shapley value, of the game \eqn{(N,v)}, is estimated using a unique sampling process for all players, see \cite{Castro et al. (2009)}.
+Given a problem of sharing delays in a stochastic project \eqn{(N,\prec,\{X_i\}_{i\in N},\{x_i\}_{i\in N})},  such that \eqn{\{X_i\}_{i\in N}} is the random variable of activities' durations and \eqn{\{x_i\}_{i\in N}} the observed value. It is defined as \eqn{E(D(N,\prec,\{X_i\}_{i\in N}))} the expected project time, where \eqn{E} is the mathematical expectation, and \eqn{D(N,\prec,\{x_i\}_{i\in N})} the observed project time, then \eqn{d=D(N,\prec,\{X_i\}_{i\in N})-\delta}, with \eqn{\delta>0}, normally \eqn{\delta>E(D(N,\prec,\{X_i\}_{i\in N}))}, is the delay. The proportional and truncated proportional rule, see delay.pert function, can be adapted to this context by using the mean of the random variables.
+
+The Stochastic Shapley rule is based on the Shapley value for the TU game \eqn{(N,v)} where \eqn{v(S)=E(C(D(N,\prec,(\{X_i\}_{i\in N\backslash S},\{x_i\}_{i\in S})))}, for all \eqn{S\subseteq N}, where \eqn{C} is the costs function (by default \eqn{C(y)=D(N,\prec,y)-\delta}).  If the number of activities is greater than ten, the Shapley value, of the game \eqn{(N,v)}, is estimated using a unique sampling process for all players, see \cite{Castro et al. (2009)}.
+
+The Stochastic Shapley rule 2 is based on the sum of the Shapley values for the TU games \eqn{(N,v)} and \eqn{(N,w)} where \eqn{v(S)=E(C(D(N,\prec,(\{X_i\}_{i\in N\backslash S},\{x_i\}_{i\in S}))))-E(C(D(N,\prec,(\{X_i\}_{i\in N}))))} and \eqn{w(S)=E(C(D(N,\prec,(\{0_i\}_{i\in N\backslash S},\{X_i\}_{i\in S}))))}, for all \eqn{S\subseteq N}, \eqn{0_N} denotes the vector in \eqn{R^N} whose components are equal to zero and where \eqn{C} is the costs function (by default \eqn{C(y)=D(N,\prec,y)-\delta}).
 }
 \examples{
 
-precedence<-matrix(c(0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
+prec1and2<-matrix(c(0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
 distribution<-c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","EXPONENTIAL")
 values<-matrix(c(1,3,2,1/2,3/2,1,1/4,9/4,1/2,3,5,4,1/2,0,0),nrow=5,byrow=TRUE)
 observed.duration<-c(2.5,1.25,2,4.5,3)
 percentile<-NULL
 delta<-6.5
-delay.stochastic.pert(precedence,distribution,values,observed.duration,percentile,delta,10000)
+delay.stochastic.pert(prec1and2=prec1and2,distribution=distribution,values=values,
+observed.duration=observed.duration,percentile=percentile,delta=delta,
+cost.function=NULL,compilations=1000)
 
 }
 \references{

@@ -4,17 +4,22 @@
 \alias{stochastic.pert}
 \title{Stochastic projects}
 \usage{
-stochastic.pert(precedence, distribution, values, percentile = 0.95,
+stochastic.pert(prec1and2 = matrix(0), prec3and4 = matrix(0), distribution,
+  values, percentile = 0.95, plot.activities.times = NULL,
   compilations = 1000)
 }
 \arguments{
-\item{precedence}{A matrix that indicates the order of precedence between activities. If the value \eqn{(i,j)} is equal to 1 then \eqn{i} precedes \eqn{j}.}
+\item{prec1and2}{A matrix indicating the order of precedence type 1 and 2 between the activities (Default=matrix(0)). If value \eqn{(i,j)=1} then activity \eqn{i} precedes type \eqn{1} to \eqn{j}, and if \eqn{(i,j)=2} then activity \eqn{i} precedes type \eqn{2} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.}
 
-\item{distribution}{Type of distribution that each activities' duration has. It can be NORMAL, TRIANGLE, EXPONENTIAL, UNIFORM and EMPIRICAL.}
+\item{prec3and4}{A matrix indicating the order of precedence type 3 and 4 between the activities (Default=matrix(0)). If value \eqn{(i,j)=3} then activity \eqn{i} precedes type \eqn{3} to \eqn{j}, and if \eqn{(i,j)=4} then activity \eqn{i} precedes type \eqn{4} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.}
 
-\item{values}{Matrix with the parameters corresponding to the distribution associated with the duration for each activity. Considering i as an activity we have the following cases. If the distribution is TRIANGLE, then (i, 1) it is the minimum value, (i, 2) the maximum value and (i, 3) the mode. If the distribution is NORMAL, (i, 1) is the mean and (i, 2) the variance. If the distribution is EXPONENTIAL, then (i, 1) is the \eqn{\lambda} parameter. If the distribution is UNIFORM, (i, 1) it is the minimum value and (i, 2) the maximum value. Finally, if the distribution is EMPIRICAL, then (i,j), for all \eqn{j\in \{1,...,M\}} such that \eqn{M>0}, is the sample.}
+\item{distribution}{Type of distribution that each activities' duration has. It can be NORMAL, TRIANGLE, EXPONENTIAL, UNIFORM, T-STUDENT, FDISTRIBUTION, CHI-SQUARED, GAMMA, WEIBULL, BINOMIAL, POISSON, GEOMETRIC, HYPERGEOMETRIC and EMPIRICAL.}
+
+\item{values}{Matrix with the parameters corresponding to the distribution associated with the duration for each activity. Considering i as an activity we have the following cases. If the distribution is TRIANGLE, then (i, 1) it is the minimum value, (i, 2) the maximum value and (i, 3) the mode. If the distribution is NORMAL, (i, 1) is the mean and (i, 2) the variance. If the distribution is EXPONENTIAL, then (i, 1) is the \eqn{\lambda} parameter. If the distribution is UNIFORM, (i, 1) it is the minimum value and (i, 2) the maximum value. If the distribution is T-STUDENT, (i, 1) degrees of freedom and (i, 2) non-centrality parameter delta. In FDISTRIBUTION, (i, 1) and (i, 2) degrees of freedom and (i, 3) non-centrality parameter. In CHI-SQUARED, (i, 1) degrees of freedom and (i, 2) non-centrality parameter (non-negative). In GAMMA, (i, 1) and (i, 3) shape and scale parameters and (i, 2) an alternative way to specify the scale. In WEIBULL, (i, 1) and (i, 2) shape and scale parameters. In BINOMIAL, (i, 1) number of trials (zero or more) and (i, 2) probability of success on each trial. In POISSON, (i, 1) non-negative mean. In GEOMETRIC, (i, 1) probability of success in each trial, between 0 and 1. In HYPERGEOMETRIC, (i, 1) number of white balls in the urn, (i, 2) number of black balls in the urn and (i, 3) numer of balls drawn from the urn. Finally, if the distribution is EMPIRICAL, then (i,j), for all \eqn{j\in \{1,...,M\}} such that \eqn{M>0}, is the sample.}
 
 \item{percentile}{Percentile used to calculate the maximum time allowed for the duration of the project (Default=0.95).}
+
+\item{plot.activities.times}{Vector of selected activities to show the distribution of their early and last times (Default=NULL).}
 
 \item{compilations}{Number of compilations that the function will use for average calculations (Default=1000).}
 }
@@ -22,13 +27,15 @@ stochastic.pert(precedence, distribution, values, percentile = 0.95,
 Two values, average duration time and the maximum time allowed, a critically index vector and a durations histogram.
 }
 \description{
-This function calculates the average duration time for a stochastic project and the activities criticality index. It also plots in a histogram the duration of the project, as well as the estimate density and the normal density.
+This function calculates the average duration time for a stochastic project and the activities criticality index. It also plots the estimate density of the project duration, as well as the estimate density of the early and last times.
 }
 \examples{
-precedence<-matrix(c(0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
+prec1and2<-matrix(c(0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
 distribution<-c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","EXPONENTIAL")
 values<-matrix(c(1,3,2,1/2,3/2,1,1/4,9/4,1/2,3,5,4,1/2,0,0),nrow=5,byrow=TRUE)
 percentile<-0.95
-stochastic.pert(precedence,distribution,values,percentile)
+plot.activities.times<-c(1,4,5)
+stochastic.pert(prec1and2=prec1and2,distribution=distribution,values=values,
+percentile=percentile,plot.activities.times=plot.activities.times)
 
 }
