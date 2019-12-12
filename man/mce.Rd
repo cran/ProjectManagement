@@ -35,7 +35,7 @@ duration<-c(5,4,5,2,2)
 minimum.durations<-c(3,2,3,1,1)
 activities.costs<-c(1,1,1,1,1)
 prec1and2<-matrix(c(0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
-duration.project<-7
+duration.project<-6
 
 mce(duration,minimum.durations,prec1and2,prec3and4=matrix(0),activities.costs,duration.project)
 }

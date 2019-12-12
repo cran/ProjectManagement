@@ -19,10 +19,9 @@
 #'minimum.durations<-c(3,2,3,1,1)
 #'activities.costs<-c(1,1,1,1,1)
 #'prec1and2<-matrix(c(0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)
-#'duration.project<-7
+#'duration.project<-6
 #'
 #'mce(duration,minimum.durations,prec1and2,prec3and4=matrix(0),activities.costs,duration.project)
-
 
 mce<-function(duration,minimum.durations,prec1and2=matrix(0),prec3and4=matrix(0),activities.costs,duration.project=NULL){
   estimated.durations<-duration
@@ -38,125 +37,162 @@ mce<-function(duration,minimum.durations,prec1and2=matrix(0),prec3and4=matrix(0)
   iii<-activities[ii]
   nn<-length(iii)
   if(nn>0){
-  prec<-matrix(0,nrow=nn,ncol=n-1)
-  for(j in 1:nn){
-    prec[j,1:length(which(precedence[iii[j],]==1))]<-which(precedence[iii[j],]==1)
-  }
-  prec<-prec[,as.logical(colSums(prec)),drop=FALSE]
-}
-
-
-
-
-des<-rep("<=",3*n)
-
-
-EJEM1<-make.lp(3*n,n)
-A<-diag(1,n,n)
-{
-if(is.null(duration.project)==FALSE){
-for(i in 1:n){
-set.row(EJEM1,i,A[i,])
-set.row(EJEM1,n+i,-A[i,])
-set.row(EJEM1,2*n+i,A[i,])
-
-{
-if(sum(precedence[i,])!=0){
-set.rhs(EJEM1,min(tiempo.early[prec[which(iii==i),]])-tiempo.early[i],2*n+i)
-}
-else{
-set.rhs(EJEM1,duration.project-tiempo.early[i],2*n+i)
-}
-}
-}
-
-set.rhs(EJEM1,estimated.durations[or2],1:n)
-set.rhs(EJEM1,-minimum.durations[or2],(n+1):(2*n))
-
-
-set.constr.type(EJEM1,des)
-set.objfn(EJEM1,activities.costs[or2])
-lp.control(EJEM1,sense="max")
-
-solve(EJEM1)
-
-
-{
-  if(solve(EJEM1)<=1){
-tiempos<-get.variables(EJEM1)
-costes<-(estimated.durations[or2]-tiempos)*activities.costs[or2]
-A<-matrix(0,nrow=n,ncol=2)
-A[,1]<-tiempos[or1]
-A[,2]<-costes[or1]
-colnames(A)<-c("estimated activities durations","costs")
-cat("The project duration is",duration.project ,"\n")
-return(round(A,5))
-  }
-  else{
-    cat("The problem has no solution", "\n")
-  }
-}
-}
-else{
-  cat("necessary negative increase", "\n")
-  inc <- scan(what = "character", n = 1)
-
-  duracion.total<-max(tiempo.early+estimated.durations[or2])
-  inc<-seq(duracion.total-as.numeric(inc),as.numeric(inc),by=-as.numeric(inc))
-  tiempos<-matrix(0,n,1)
-  for(j in inc){
-  for(i in 1:n){
-    set.row(EJEM1,i,A[i,])
-    set.row(EJEM1,n+i,-A[i,])
-    set.row(EJEM1,2*n+i,A[i,])
-
-    {
-      if(sum(precedence[i,])!=0){
-        set.rhs(EJEM1,min(tiempo.early[prec[which(iii==i),]])-tiempo.early[i],2*n+i)
-      }
-      else{
-        set.rhs(EJEM1,j-tiempo.early[i],2*n+i)
-      }
+    prec<-matrix(0,nrow=nn,ncol=n-1)
+    for(j in 1:nn){
+      prec[j,1:length(which(precedence[iii[j],]==1))]<-which(precedence[iii[j],]==1)
     }
+    prec<-prec[,as.logical(colSums(prec)),drop=FALSE]
   }
 
-  set.rhs(EJEM1,estimated.durations[or2],1:n)
-  set.rhs(EJEM1,-minimum.durations[or2],(n+1):(2*n))
+  m<-length(which(prec!=0))
+  mm<-rep(1,n)
 
+  des<-rep("<=",2*n+m+(n-length(iii)))
 
-  set.constr.type(EJEM1,des)
-  set.objfn(EJEM1,activities.costs[or2])
-  lp.control(EJEM1,sense="max")
-
-  if(solve(EJEM1)>=2){break}
-
+  cont<-1
+  EJEM1<-make.lp(2*n+m+(n-length(iii)),2*n)
+  A<-diag(1,n,2*n)
   {
-  if(j==inc[1]){tiempos[,1]<-get.variables(EJEM1)
-  durations<-j
-  }
-  else{tiempos<-cbind(tiempos,get.variables(EJEM1))
-  durations<-c(durations,j)
-  }
-  }
-  }
-  {
-    if(sum(tiempos[,1])!=0){
-      costes<-apply(tiempos,2,function(x) ((cbind(estimated.durations[or2])-x)*activities.costs[or2]))
-      cat("Project duration = ",  "\n")
-      print(durations)
-      cat("Estimated durations = ",  "\n")
-      print(round(tiempos[or1,],5))
-      cat("Costs per solution  = ", "\n")
-      print(round(costes[or1,],5))
+    if(is.null(duration.project)==FALSE){
+      for(i in 1:n){
+        set.row(EJEM1,i,A[i,])
+        set.row(EJEM1,n+i,-A[i,])
+        #set.row(EJEM1,2*n+i,A[i,])
+
+        {
+          if(sum(precedence[i,])!=0){
+
+            AA<-A[i,]
+            AA[n+i]<-1
+
+            pr<-prec[iii==i,]
+            pr<-pr[pr!=0]
+
+            for(j in 1:length(pr)){
+              AAA<-AA
+              AAA[n+pr[j]]<--1
+              set.row(EJEM1,2*n+cont,AAA)
+              cont<-cont+1
+            }
+
+          }
+          else{
+
+            AA<-A[i,]
+            AA[n+i]<-1
+            set.row(EJEM1,2*n+cont,AA)
+            set.rhs(EJEM1,duration.project,2*n+cont)
+            cont<-cont+1
+          }
+        }
+      }
+
+      set.rhs(EJEM1,estimated.durations[or2],1:n)
+      set.rhs(EJEM1,-minimum.durations[or2],(n+1):(2*n))
+
+      ob<-c(activities.costs[or2],rep(0,n))
+      set.constr.type(EJEM1,des)
+      set.objfn(EJEM1,ob)
+      lp.control(EJEM1,sense="max")
+
+      solve(EJEM1)
+
+
+      {
+        if(solve(EJEM1)<=1){
+          tiempos<-get.variables(EJEM1)[1:n]
+          costes<-(estimated.durations[or2]-tiempos)*activities.costs[or2]
+          A<-matrix(0,nrow=n,ncol=2)
+          A[,1]<-tiempos[or1]
+          A[,2]<-costes[or1]
+          colnames(A)<-c("estimated activities durations","costs")
+          cat("The project duration is",duration.project ,"\n")
+          return(round(A,5))
+        }
+        else{
+          cat("The problem has no solution", "\n")
+        }
+      }
     }
     else{
-      cat("The problem has no solution", "\n")
+      cat("necessary negative increase", "\n")
+      inc <- scan(what = "character", n = 1)
+
+      duracion.total<-max(tiempo.early+estimated.durations[or2])
+      inc<-seq(duracion.total-as.numeric(inc),as.numeric(inc),by=-as.numeric(inc))
+      tiempos<-matrix(0,n,1)
+      for(j in inc){
+        cont<-1
+        for(i in 1:n){
+          set.row(EJEM1,i,A[i,])
+          set.row(EJEM1,n+i,-A[i,])
+          #set.row(EJEM1,2*n+i,A[i,])
+
+          {
+            if(sum(precedence[i,])!=0){
+
+              AA<-A[i,]
+              AA[n+i]<-1
+
+              pr<-prec[iii==i,]
+              pr<-pr[pr!=0]
+
+              for(z in 1:length(pr)){
+                AAA<-AA
+                AAA[n+pr[z]]<--1
+                set.row(EJEM1,2*n+cont,AAA)
+                cont<-cont+1
+
+              }
+            }
+            else{
+
+              AA<-A[i,]
+              AA[n+i]<-1
+              set.row(EJEM1,2*n+cont,AA)
+              set.rhs(EJEM1,j,2*n+cont)
+              cont<-cont+1
+
+            }
+          }
+        }
+
+        set.rhs(EJEM1,estimated.durations[or2],1:n)
+        set.rhs(EJEM1,-minimum.durations[or2],(n+1):(2*n))
+
+        ob<-c(activities.costs[or2],rep(0,n))
+        set.constr.type(EJEM1,des)
+        set.objfn(EJEM1,ob)
+        lp.control(EJEM1,sense="max")
+
+        if(solve(EJEM1)>=2){break}
+
+        {
+          if(j==inc[1]){tiempos[,1]<-get.variables(EJEM1)[1:n]
+          durations<-j
+          }
+          else{tiempos<-cbind(tiempos,get.variables(EJEM1)[1:n])
+          durations<-c(durations,j)
+          }
+        }
+      }
+      {
+        if(sum(tiempos[,1])!=0){
+          costes<-apply(tiempos,2,function(x) ((cbind(estimated.durations[or2])-x)*activities.costs[or2]))
+          cat("Project duration = ",  "\n")
+          print(durations)
+          cat("Estimated durations = ",  "\n")
+          print(round(tiempos[or1,],5))
+          cat("Costs per solution  = ", "\n")
+          print(round(costes[or1,],5))
+        }
+        else{
+          cat("The problem has no solution", "\n")
+        }
+      }
     }
   }
-}
-}
 
 }
-
 
 

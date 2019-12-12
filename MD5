@@ -1,13 +1,13 @@
-594a31252ef2929f5630e23f50902e16 *DESCRIPTION
+81b4e929c0445ba289b06b74d3ad42c6 *DESCRIPTION
 9da74e224de81302e76b14b8d8eae603 *NAMESPACE
 7a568dea94899143e5ea411d82622f71 *R/ProjectManagement.R
 dc83969349198a5c030c46e506b22a74 *R/function_early_time.R
 57312c2f465425627872afd94229b6f2 *R/function_last_time.R
-7f8eea5051942425d5657d5e61820214 *R/function_mce.R
+f285a78b70cacb9e6d62e88c25e6ae17 *R/function_mce.R
 1b6faa2a21e0981de481be4d933016c4 *R/function_organize.R
 2d51a56329a8af0458aa44f0a4950219 *R/function_pert_calendario.R
 fe3e19ffac2311cb0ebb0836992b84ac *R/function_pert_demora.R
-9f342dd5252997182941cf72a255f984 *R/function_pert_estocastico.R
+2cdc3d8e9f02d143efc1a603cf9ed399 *R/function_pert_estocastico.R
 700f4f077a19d960316d494925e62233 *R/function_pert_estocastico_demora.R
 d24ee1e2e63871b2807df023e2b2cbd0 *R/function_rebuild.R
 ad73cf2db84feb4030e1991f1564a0c3 *R/function_resource_allocation.R
@@ -18,7 +18,7 @@ b5db0d38497c9e3ad78eee7b272c50a5 *man/delay.stochastic.pert.Rd
 d8e90ab180329c011bc33fa46b83c82a *man/early.time.Rd
 78b827b0808d823b1820bf1a1564a21f *man/last.time.Rd
 6d490697e9e0c46de3668f05d4a56fd3 *man/levelling.resources.Rd
-18038591a33733fb1a79746557f44038 *man/mce.Rd
+bdaf86334a323527d9dcbb4ae8113ecc *man/mce.Rd
 26f4bc24e941adfff7551a1059e75881 *man/organize.Rd
 ec47b76105d8a835be987dcfcabf5f78 *man/rebuild.Rd
 0b9899d108f214bf4979b8e3a47e2dcd *man/resource.allocation.Rd

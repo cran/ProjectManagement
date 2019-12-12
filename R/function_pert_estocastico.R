@@ -123,9 +123,11 @@ stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribution,v
     for(j in length(iii1):1) {
       tiempo.last[iii1[j]]=min(tiempo.last[prec1[j,]]-duration[i,prec1[j,]]);
     }
-}
+    }
+    if(is.null(plot.activities.times)==FALSE){
     T.E[i,]<-tiempo.early[plot.activities.times]
     T.L[i,]<-tiempo.last[plot.activities.times]
+    }
     tiempo.computacion[i]<-max(tiempo.early+duration[i,])
     caminos.criticos[i,]<-(tiempo.last-tiempo.early-duration[i,])
 
