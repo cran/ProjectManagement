@@ -142,7 +142,7 @@ stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribution,v
 
   cat("Average time of the project = ", mean(tiempo.computacion), "\n")
   cat(" ","\n")
-  cat("Maximum duration allowed of the project = ", delta, "\n")
+  cat("Percentile duration of the project = ", delta, "\n")
   A<-matrix(c((C[or1]/compilations)*100),ncol=length(activities),byrow=TRUE)
   colnames(A)=c(activities)
   rownames(A)=c("Criticality index by activity  ")

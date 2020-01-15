@@ -1,8 +1,8 @@
 Package: ProjectManagement
 Type: Package
 Title: Management of Deterministic and Stochastic Projects
-Date: 2019-12-12
-Version: 1.2.3
+Date: 2020-01-15
+Version: 1.2.4
 Authors@R: c(
       person("Juan Carlos","Gonçalves Dosantos",role=c("aut","cre"), email="juan.carlos.goncalves@udc.es"),
 			person("Ignacio","García Jurado",role=c("aut")),
@@ -20,6 +20,6 @@ Author: Juan Carlos Gonçalves Dosantos [aut, cre],
   Julián Costa Bouzas [aut]
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2019-12-12 11:22:43 UTC; User
+Packaged: 2020-01-15 10:49:20 UTC; User
 Repository: CRAN
-Date/Publication: 2019-12-12 11:40:02 UTC
+Date/Publication: 2020-01-15 11:40:02 UTC

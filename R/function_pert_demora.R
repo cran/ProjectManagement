@@ -187,14 +187,14 @@ delay.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),observed.d
       if(continue=="Y"){
         A<-matrix(c(Prop[or1],TProp[or1],sh[or1]),ncol=length(activities),byrow=TRUE)
         colnames(A)=c(activities)
-        rownames(A)=c("The proportional payment by activity is ","The truncated proportional payment  by activity is ", "Shapley rule")
+        rownames(A)=c("The proportional payment ","The truncated proportional payment ", "Shapley rule")
         cat(" ","\n")
         return(round(A,5))
       }
       else{
         A<-matrix(c(Prop[or1],TProp[or1]),ncol=length(activities),byrow=TRUE)
         colnames(A)=c(activities)
-        rownames(A)=c("The proportional payment by activity is ","The truncated proportional payment  by activity is ")
+        rownames(A)=c("The proportional payment ","The truncated proportional payment ")
         cat(" ","\n")
         return(round(A,5))
       }

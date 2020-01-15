@@ -129,7 +129,7 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
       add_markers(x = ~finalizacion.temprano, y = ~activities,color = I("green"),hoverinfo = "text",marker = list(size = 10), name = 'Earliest completion date',text = ~paste("Activity: ", activities,"Earliest completion date: ",finalizacion.temprano), mode = 'markers',type = 'scatter') %>%
       add_markers(x = ~finalizacion.tardia, y = ~activities,marker = list(size = 10), hoverinfo = "text",name = 'Later completion date',text = ~paste("Activity: ", activities,"Later completion date: ",finalizacion.tardia), mode = 'markers',type = 'scatter') %>%
       layout(title = "Schedule",yaxis=list(title = "Activities"),xaxis = list(title = "Times",zeroline=FALSE))
-    colnames(data)=c("Activities"," Duration"," Earliest start date"," Later start date"," Earliest completion date"," Later completion date "," Slacks for each activity", "Free Slacks", "Independent Slacks")
+    colnames(data)=c("Activities"," Duration"," Earliest start time"," Latest start time"," Earliest completion time"," Latest completion time"," Slack", "Free Slack", "Independent Slack")
     lista<-list('Total duration of the project'=duracion.total,data)
     print(print)
     return(lista)
@@ -179,7 +179,7 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
     IS<-pmax(IS[or1],0)
 
     data <- data.frame(activities,duration,comienzo.temprano,comienzo.tardio,finalizacion.temprano,finalizacion.tardia,holguras.actividades,FS,IS)
-    colnames(data)=c("Activities"," Duration"," Earliest start date"," Later start date"," Earliest completion date"," Later completion date "," Slacks for each activity", "Free Slacks", "Independent Slacks")
+    colnames(data)=c("Activities"," Duration"," Earliest start time"," Latest start time"," Earliest completion time"," Latest completion time"," Slack", "Free Slack", "Independent Slack")
     lista<-list('Total duration of the project'=duracion.total,data)
     return(lista)
   }
