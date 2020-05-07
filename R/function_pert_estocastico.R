@@ -14,7 +14,7 @@
 #' distribution<-c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","EXPONENTIAL")
 #' values<-matrix(c(1,3,2,1/2,3/2,1,1/4,9/4,1/2,3,5,4,1/2,0,0),nrow=5,byrow=TRUE)
 #' percentile<-0.95
-#' plot.activities.times<-c(1,4,5)
+#' plot.activities.times<-c(1,4)
 #' stochastic.pert(prec1and2=prec1and2,distribution=distribution,values=values,
 #' percentile=percentile,plot.activities.times=plot.activities.times)
 #'
@@ -153,8 +153,8 @@ stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribution,v
   layout(matrix(c(1,1,2:(2*length(plot.activities.times)+1)), (length(plot.activities.times)+1), 2, byrow = TRUE))
   plot(density(tiempo.computacion),lwd=2,xlab="Project duration times",main="Density of project duration time")
   for(i in 1:length(plot.activities.times)){
-    plot(density(T.E[,i]),lwd=2,xlab="Early times",main=paste("Density of Early time activity ",plot.activities.times[i]))
-    plot(density(T.L[,i]),lwd=2,xlab="Last times",main=paste("Density of Last time activity ",plot.activities.times[i]))
+    plot(density(T.E[,i]),lwd=2,xlab="Earliest start times",main=paste("Density of Earliest start time activity ",plot.activities.times[i]))
+    plot(density(T.L[,i]),lwd=2,xlab="Latest completion times",main=paste("Density of Latest completion time activity ",plot.activities.times[i]))
   }
   }
     else{

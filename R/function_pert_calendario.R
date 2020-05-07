@@ -130,8 +130,15 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
       add_markers(x = ~finalizacion.tardia, y = ~activities,marker = list(size = 10), hoverinfo = "text",name = 'Later completion date',text = ~paste("Activity: ", activities,"Later completion date: ",finalizacion.tardia), mode = 'markers',type = 'scatter') %>%
       layout(title = "Schedule",yaxis=list(title = "Activities"),xaxis = list(title = "Times",zeroline=FALSE))
     colnames(data)=c("Activities"," Duration"," Earliest start time"," Latest start time"," Earliest completion time"," Latest completion time"," Slack", "Free Slack", "Independent Slack")
-    lista<-list('Total duration of the project'=duracion.total,data)
+    lista<-list('Total duration of the project'=duracion.total,data,print)
     print(print)
+
+    critical.activities<-holguras.actividades%in%0
+   if(dim(prec3and4)[1]==1){prec3and4<-NULL}
+    print2<-dag.plot(prec1and2,prec3and4,critical.activities)
+
+
+
     return(lista)
   }
   else{

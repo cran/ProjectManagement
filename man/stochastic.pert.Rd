@@ -34,7 +34,7 @@ prec1and2<-matrix(c(0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0),nrow=5,nc
 distribution<-c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","EXPONENTIAL")
 values<-matrix(c(1,3,2,1/2,3/2,1,1/4,9/4,1/2,3,5,4,1/2,0,0),nrow=5,byrow=TRUE)
 percentile<-0.95
-plot.activities.times<-c(1,4,5)
+plot.activities.times<-c(1,4)
 stochastic.pert(prec1and2=prec1and2,distribution=distribution,values=values,
 percentile=percentile,plot.activities.times=plot.activities.times)
 
