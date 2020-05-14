@@ -4,9 +4,17 @@
 \alias{delay.stochastic.pert}
 \title{Problems of distribution of delay in stochastic projects}
 \usage{
-delay.stochastic.pert(prec1and2 = matrix(0), prec3and4 = matrix(0),
-  distribution, values, observed.duration, percentile = NULL, delta = NULL,
-  cost.function = NULL, compilations = 1000)
+delay.stochastic.pert(
+  prec1and2 = matrix(0),
+  prec3and4 = matrix(0),
+  distribution,
+  values,
+  observed.duration,
+  percentile = NULL,
+  delta = NULL,
+  cost.function = NULL,
+  compilations = 1000
+)
 }
 \arguments{
 \item{prec1and2}{A matrix indicating the order of precedence type 1 and 2 between the activities (Default=matrix(0)). If value \eqn{(i,j)=1} then activity \eqn{i} precedes type \eqn{1} to \eqn{j}, and if \eqn{(i,j)=2} then activity \eqn{i} precedes type \eqn{2} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.}

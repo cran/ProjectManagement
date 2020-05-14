@@ -4,8 +4,7 @@
 \alias{last.time}
 \title{Last time for a deterministic projects}
 \usage{
-last.time(prec1and2 = matrix(0), prec3and4 = matrix(0), duration,
-  early.times)
+last.time(prec1and2 = matrix(0), prec3and4 = matrix(0), duration, early.times)
 }
 \arguments{
 \item{prec1and2}{A matrix indicating the order of precedence type 1 and 2 between the activities (Default=matrix(0)). If value \eqn{(i,j)=1} then activity \eqn{i} precedes type \eqn{1} to \eqn{j}, and if \eqn{(i,j)=2} then activity \eqn{i} precedes type \eqn{2} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.}

@@ -4,8 +4,14 @@
 \alias{mce}
 \title{Build a precedence matrix}
 \usage{
-mce(duration, minimum.durations, prec1and2 = matrix(0),
-  prec3and4 = matrix(0), activities.costs, duration.project = NULL)
+mce(
+  duration,
+  minimum.durations,
+  prec1and2 = matrix(0),
+  prec3and4 = matrix(0),
+  activities.costs,
+  duration.project = NULL
+)
 }
 \arguments{
 \item{duration}{Vector with the duration for each activity.}

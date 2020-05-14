@@ -4,8 +4,14 @@
 \alias{resource.allocation}
 \title{Project resource allocation}
 \usage{
-resource.allocation(duration, prec1and2, prec3and4 = matrix(0), resources,
-  max.resources, int = 1)
+resource.allocation(
+  duration,
+  prec1and2,
+  prec3and4 = matrix(0),
+  resources,
+  max.resources,
+  int = 1
+)
 }
 \arguments{
 \item{duration}{Vector with the duration for each activity.}

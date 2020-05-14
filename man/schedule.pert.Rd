@@ -4,8 +4,12 @@
 \alias{schedule.pert}
 \title{Schedule for deterministic projects}
 \usage{
-schedule.pert(duration, prec1and2 = matrix(0), prec3and4 = matrix(0),
-  PRINT = TRUE)
+schedule.pert(
+  duration,
+  prec1and2 = matrix(0),
+  prec3and4 = matrix(0),
+  PRINT = TRUE
+)
 }
 \arguments{
 \item{duration}{Vector with the duration for each activity.}

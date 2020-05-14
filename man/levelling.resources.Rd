@@ -4,8 +4,13 @@
 \alias{levelling.resources}
 \title{Project resource levelling}
 \usage{
-levelling.resources(duration, prec1and2 = matrix(0), prec3and4 = matrix(0),
-  resources, int = 1)
+levelling.resources(
+  duration,
+  prec1and2 = matrix(0),
+  prec3and4 = matrix(0),
+  resources,
+  int = 1
+)
 }
 \arguments{
 \item{duration}{Vector with the duration for each activity.}

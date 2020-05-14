@@ -1,7 +1,7 @@
 #' @title DAG plot
 #' @description This function plots a directed acyclic graph (DAG).
-#' @param prec1and2 A matrix indicating the order of precedence type 1 and 2 between the activities (Default=NULL). If value \eqn{(i,j)=1} then activity \eqn{i} precedes type \eqn{1} to \eqn{j}, and if \eqn{(i,j)=2} then activity \eqn{i} precedes type \eqn{2} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.
-#' @param prec3and4 A matrix indicating the order of precedence type 3 and 4 between the activities (Default=NULL). If value \eqn{(i,j)=3} then activity \eqn{i} precedes type \eqn{3} to \eqn{j}, and if \eqn{(i,j)=4} then activity \eqn{i} precedes type \eqn{4} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.
+#' @param prec1and2 A matrix indicating the order of precedence type 1 and 2 between the activities (Default=matrix(0)). If value \eqn{(i,j)=1} then activity \eqn{i} precedes type \eqn{1} to \eqn{j}, and if \eqn{(i,j)=2} then activity \eqn{i} precedes type \eqn{2} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.
+#' @param prec3and4 A matrix indicating the order of precedence type 3 and 4 between the activities (Default=matrix(0)). If value \eqn{(i,j)=3} then activity \eqn{i} precedes type \eqn{3} to \eqn{j}, and if \eqn{(i,j)=4} then activity \eqn{i} precedes type \eqn{4} to \eqn{j}. Cycles cannot exist in a project,  i.e. if an activity \eqn{i} precedes \eqn{j} then \eqn{j} cannot precede \eqn{i}.
 #' @param critical.activities A vector indicating the critical activities to represent them in a different color (Default=NULL) .
 #' @export
 #' @return A plot.
@@ -15,14 +15,14 @@
 
 
 
-dag.plot<-function(prec1and2=NULL,prec3and4=NULL,critical.activities=NULL){
+dag.plot<-function(prec1and2=matrix(0),prec3and4=matrix(0),critical.activities=NULL){
 
 
 A<-prec1and2
 A0<-prec1and2
 A0[A0%in%2]<-0
 
-if(is.null(prec3and4)){prec3and4=matrix(0,nrow=dim(A)[1],ncol=dim(A)[2])}
+if(dim(prec3and4)[1]==1){prec3and4=matrix(0,nrow=dim(A)[1],ncol=dim(A)[2])}
 
 B<-prec3and4
 
@@ -77,12 +77,14 @@ network <- graph_from_adjacency_matrix(B)
 
 # plot it
 if(is.null(critical.activities)){
+  #windows()
   plot(network,edge.label=label,vertex.color = "green",vertex.shape="square",vertex.label.color=c(rep("black",dim(A)[1]),"blue","blue")
 ,layout=layout.kamada.kawai)
 }
 else{
   color<-c(rep("green",dim(prec1and2)[1]),"red","red")
   color[critical.activities]<-"red"
+  #windows()
   plot(network,edge.label=label,vertex.color = color,vertex.shape="square",vertex.label.color=c(rep("black",dim(A)[1]),"blue","blue")
        ,layout=layout.kamada.kawai)
 }

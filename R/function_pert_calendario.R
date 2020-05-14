@@ -119,22 +119,19 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
   FS<-FS[or1]
   IS<-pmax(IS[or1],0)
 
-    data <- data.frame(activities,duration,comienzo.temprano,comienzo.tardio,finalizacion.temprano,finalizacion.tardia,holguras.actividades,FS,IS)
-    print<-plot_ly(data) %>%
-      add_segments(x = ~comienzo.temprano, xend = ~comienzo.tardio, y = ~activities, yend = ~activities,hoverinfo = "text", color = I("black"),showlegend = FALSE) %>%
-      add_segments(x = ~comienzo.tardio, xend = ~finalizacion.temprano, y = ~activities, yend = ~activities, hoverinfo = "text", color = I("black"),showlegend = FALSE) %>%
-      add_segments(x = ~finalizacion.temprano, xend = ~finalizacion.tardia, y = ~activities,hoverinfo = "text", yend = ~activities, color = I("black"), showlegend = FALSE) %>%
-      add_markers(x = ~comienzo.temprano, y = ~activities,marker = list(size = 10),hoverinfo = "text", name = 'Earliest start date',text = ~paste("Activitye: ", activities,"Early start date: ",comienzo.temprano), mode = 'markers',type = 'scatter') %>%
-      add_markers(x = ~comienzo.tardio, y = ~activities, color = I("blue"),hoverinfo = "text",marker = list(size = 10),name = 'Later start date',text = ~paste("Activity: ", activities,"Later start date: ",comienzo.tardio), mode = 'markers',type = 'scatter') %>%
-      add_markers(x = ~finalizacion.temprano, y = ~activities,color = I("green"),hoverinfo = "text",marker = list(size = 10), name = 'Earliest completion date',text = ~paste("Activity: ", activities,"Earliest completion date: ",finalizacion.temprano), mode = 'markers',type = 'scatter') %>%
-      add_markers(x = ~finalizacion.tardia, y = ~activities,marker = list(size = 10), hoverinfo = "text",name = 'Later completion date',text = ~paste("Activity: ", activities,"Later completion date: ",finalizacion.tardia), mode = 'markers',type = 'scatter') %>%
-      layout(title = "Schedule",yaxis=list(title = "Activities"),xaxis = list(title = "Times",zeroline=FALSE))
-    colnames(data)=c("Activities"," Duration"," Earliest start time"," Latest start time"," Earliest completion time"," Latest completion time"," Slack", "Free Slack", "Independent Slack")
-    lista<-list('Total duration of the project'=duracion.total,data,print)
-    print(print)
+  data <- data.frame(activities,duration,comienzo.temprano,comienzo.tardio,finalizacion.temprano,finalizacion.tardia,holguras.actividades,FS,IS)
+  print<-plot_ly(data) %>%
+    add_segments(x = ~comienzo.temprano, xend = ~finalizacion.tardia, y = ~activities, yend = ~activities,hoverinfo = "text", color = I("black"),name = 'Trace',showlegend = TRUE) %>%
+    add_markers(x = ~comienzo.temprano, y = ~activities,marker = list(size = 10),hoverinfo = "text", name = 'Earliest start date',text = ~paste("Activity: ", activities,"Earliest start date: ",comienzo.temprano), mode = 'markers',type = 'scatter') %>%
+    add_markers(x = ~comienzo.tardio, y = ~activities, color = I("blue"),hoverinfo = "text",marker = list(size = 10),name = 'Latest start date',text = ~paste("Activity: ", activities,"Latest start date: ",comienzo.tardio), mode = 'markers',type = 'scatter') %>%
+    add_markers(x = ~finalizacion.temprano, y = ~activities,color = I("green"),hoverinfo = "text",marker = list(size = 10), name = 'Earliest completion date',text = ~paste("Activity: ", activities,"Earliest completion date: ",finalizacion.temprano), mode = 'markers',type = 'scatter') %>%
+    add_markers(x = ~finalizacion.tardia, y = ~activities,marker = list(size = 10), hoverinfo = "text",name = 'Latest completion date',text = ~paste("Activity: ", activities,"Latest completion date: ",finalizacion.tardia), mode = 'markers',type = 'scatter') %>%
+    layout(title = "Schedule",yaxis=list(title = "Activities"),xaxis = list(title = "Times",zeroline=FALSE))
+  colnames(data)=c("Activities"," Duration"," Earliest start time"," Latest start time"," Earliest completion time"," Latest completion time"," Slack", "Free Slack", "Independent Slack")
+  lista<-list('Total duration of the project'=duracion.total,data,print)
+  #print(print)
 
     critical.activities<-holguras.actividades%in%0
-   if(dim(prec3and4)[1]==1){prec3and4<-NULL}
     print2<-dag.plot(prec1and2,prec3and4,critical.activities)
 
 

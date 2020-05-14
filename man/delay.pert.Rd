@@ -4,8 +4,14 @@
 \alias{delay.pert}
 \title{Problems of distribution of delay in deterministic projects}
 \usage{
-delay.pert(duration, prec1and2 = matrix(0), prec3and4 = matrix(0),
-  observed.duration, delta = NULL, cost.function = NULL)
+delay.pert(
+  duration,
+  prec1and2 = matrix(0),
+  prec3and4 = matrix(0),
+  observed.duration,
+  delta = NULL,
+  cost.function = NULL
+)
 }
 \arguments{
 \item{duration}{Vector with the expected duration for each activity.}
