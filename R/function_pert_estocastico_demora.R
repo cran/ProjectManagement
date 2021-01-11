@@ -242,7 +242,7 @@ delay.stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribu
       }
 
       }
-    }
+
 
     {
     if(is.null(cost.function)==FALSE){
@@ -254,7 +254,7 @@ delay.stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribu
         w[z]<-mean(tiempo.computacion2-delta)
       }
   }
-
+}
   {
     if(length(activities)>10){
       cat("shapley need some time to compute a", n, "player game \n")
