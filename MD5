@@ -1,4 +1,4 @@
-90dbb159a0b4075a5f61aca730ebfed4 *DESCRIPTION
+c564ef57f6ad03203e9b8e6b68c084be *DESCRIPTION
 7048d5ab8e885c03022af1a436396493 *NAMESPACE
 de3198f9c19f4c4dde329949e0b64ebd *R/ProjectManagement.R
 739818ff49d1c78cfeb6e00c4eb7eac6 *R/function_dag.R
@@ -6,7 +6,7 @@ dc83969349198a5c030c46e506b22a74 *R/function_early_time.R
 57312c2f465425627872afd94229b6f2 *R/function_last_time.R
 f285a78b70cacb9e6d62e88c25e6ae17 *R/function_mce.R
 1b6faa2a21e0981de481be4d933016c4 *R/function_organize.R
-e2df938754396264e2d171fb37ef6c46 *R/function_pert_calendario.R
+b449fca49bde3985b2dff50c0b5a93bf *R/function_pert_calendario.R
 a5f0674449f6a4314676e00d36db155d *R/function_pert_demora.R
 34223f492a7717dbf512ee316cb7e820 *R/function_pert_estocastico.R
 1cd3077b24f78420db3910798454c117 *R/function_pert_estocastico_demora.R

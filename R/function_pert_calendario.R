@@ -108,12 +108,26 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
     }
     duration1<-duration[or2]
     FS<-holguras.actividades[or2]
-    IS<-rep(0,n)
+    IS<-holguras.actividades[or2]
     if(nn>0){
+      prede<-matrix(0,nrow=nn,ncol=n-1)
+      for(j in 1:nn){
+        if(length(which(precedence[,iii[j]]==1))!=0){
+        prede[j,1:length(which(precedence[,iii[j]]==1))]<-which(precedence[,iii[j]]==1)
+        }
+      }
+      prede<-prede[,as.logical(colSums(prede)),drop=FALSE]
 
       for(i in 1:nn) {
         FS[iii[i]]<-min(early.times[prec[i,]])-early.times[iii[i]]-duration1[iii[i]]
-        IS[iii[i]]<-min(early.times[prec[i,]])-last.times[iii[i]]-duration1[iii[i]]
+        {
+         if(prede[i,1]!=0){
+        IS[iii[i]]<-min(early.times[prec[i,]])-min(last.times[prede[i,]])-duration1[iii[i]]
+        }
+        else{
+          IS[iii[i]]<-min(early.times[prec[i,]])-duration1[iii[i]]
+          }
+        }
       }
     }
   FS<-FS[or1]
@@ -170,15 +184,28 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
 
     duration1<-duration[or2]
     FS<-holguras.actividades[or2]
-    IS<-rep(0,n)
+    IS<-holguras.actividades[or2]
     if(nn>0){
+      prede<-matrix(0,nrow=nn,ncol=n-1)
+      for(j in 1:nn){
+        if(length(which(precedence[,iii[j]]==1))!=0){
+          prede[j,1:length(which(precedence[,iii[j]]==1))]<-which(precedence[,iii[j]]==1)
+        }
+      }
+      prede<-prede[,as.logical(colSums(prede)),drop=FALSE]
 
       for(i in 1:nn) {
         FS[iii[i]]<-min(early.times[prec[i,]])-early.times[iii[i]]-duration1[iii[i]]
-        IS[iii[i]]<-min(early.times[prec[i,]])-last.times[iii[i]]-duration1[iii[i]]
+        {
+          if(prede[i,1]!=0){
+            IS[iii[i]]<-min(early.times[prec[i,]])-min(last.times[prede[i,]])-duration1[iii[i]]
+          }
+          else{
+            IS[iii[i]]<-min(early.times[prec[i,]])-duration1[iii[i]]
+          }
+        }
       }
     }
-
     FS<-FS[or1]
     IS<-pmax(IS[or1],0)
 
