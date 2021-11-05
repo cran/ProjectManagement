@@ -122,7 +122,7 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
         FS[iii[i]]<-min(early.times[prec[i,]])-early.times[iii[i]]-duration1[iii[i]]
         {
          if(prede[i,1]!=0){
-        IS[iii[i]]<-min(early.times[prec[i,]])-min(last.times[prede[i,]])-duration1[iii[i]]
+        IS[iii[i]]<-min(early.times[prec[i,]])-max(last.times[prede[i,]])-duration1[iii[i]]
         }
         else{
           IS[iii[i]]<-min(early.times[prec[i,]])-duration1[iii[i]]
@@ -198,7 +198,7 @@ schedule.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),PRINT=T
         FS[iii[i]]<-min(early.times[prec[i,]])-early.times[iii[i]]-duration1[iii[i]]
         {
           if(prede[i,1]!=0){
-            IS[iii[i]]<-min(early.times[prec[i,]])-min(last.times[prede[i,]])-duration1[iii[i]]
+            IS[iii[i]]<-min(early.times[prec[i,]])-max(last.times[prede[i,]])-duration1[iii[i]]
           }
           else{
             IS[iii[i]]<-min(early.times[prec[i,]])-duration1[iii[i]]
