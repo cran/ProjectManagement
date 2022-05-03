@@ -7,7 +7,7 @@
 #' @export
 #' @references
 #' \describe{
-#'   \item{}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
+#'   \item{burk}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
 #' }
 #' @return A list of a project schedule and if PRINT=TRUE a plot of schedule.
 #' @examples

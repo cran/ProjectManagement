@@ -10,7 +10,7 @@
 #' @details The problem of resource allocation takes into account that in order for activities to be carried out in the estimated time, a certain level of resources must be used. The problem is that the level of resources available in each period is limited. The aim is to obtain the minimum time and a schedule for the execution of the project taking into account this new restriction.
 #' @references
 #'  \describe{
-#'   \item{}{Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of construction engineering and management, 125(3), 167-175.}
+#'   \item{hega}{Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of construction engineering and management, 125(3), 167-175.}
 #' }
 #' @return  A solution matrices.
 #' @examples

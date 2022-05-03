@@ -9,7 +9,7 @@
 #' @details The problem of leveling resources takes into account that in order for activities to be carried out in the estimated time, a certain level of resources must be used. The problem is to find a schedule that allows to execute the project in the estimated time so that the temporary consumption of resources is as level as possible.
 #' @references
 #'  \describe{
-#'   \item{}{Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of construction engineering and management, 125(3), 167-175.}
+#'   \item{heg}{Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of construction engineering and management, 125(3), 167-175.}
 #' }
 #' @return  A solution matrices.
 #' @examples

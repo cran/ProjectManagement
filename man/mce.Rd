@@ -47,6 +47,6 @@ mce(duration,minimum.durations,prec1and2,prec3and4=matrix(0),activities.costs,du
 }
 \references{
 \describe{
-  \item{}{Kelley Jr, J. E. (1961). Critical-path planning and scheduling: Mathematical basis. Operations research, 9(3), 296-320.}
+  \item{kelley}{Kelley Jr, J. E. (1961). Critical-path planning and scheduling: Mathematical basis. Operations research, 9(3), 296-320.}
 }
 }

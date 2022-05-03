@@ -55,8 +55,8 @@ delta=delta,cost.function=NULL)
 }
 \references{
 \describe{
-  \item{}{Bergantiños, G., Valencia-Toledo, A., & Vidal-Puga, J. (2018). Hart and Mas-Colell consistency in PERT problems. Discrete Applied Mathematics, 243, 11-20.}
-  \item{}{Brânzei, R., Ferrari, G., Fragnelli, V., & Tijs, S. (2002). Two approaches to the problem of sharing delay costs in joint projects. Annals of Operations Research, 109(1-4), 359-374.}
-  \item{}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
+  \item{berg}{Bergantiños, G., Valencia-Toledo, A., & Vidal-Puga, J. (2018). Hart and Mas-Colell consistency in PERT problems. Discrete Applied Mathematics, 243, 11-20.}
+  \item{bran}{Brânzei, R., Ferrari, G., Fragnelli, V., & Tijs, S. (2002). Two approaches to the problem of sharing delay costs in joint projects. Annals of Operations Research, 109(1-4), 359-374.}
+  \item{castro}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
 }
 }

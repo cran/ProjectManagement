@@ -33,6 +33,6 @@ schedule.pert(duration,prec1and2)
 }
 \references{
 \describe{
-  \item{}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
+  \item{burk}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
 }
 }

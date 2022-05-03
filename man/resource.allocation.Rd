@@ -46,6 +46,6 @@ resource.allocation(duration,prec1and2,prec3and4=matrix(0),resources,max.resourc
 }
 \references{
 \describe{
-  \item{}{Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of construction engineering and management, 125(3), 167-175.}
+  \item{hega}{Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of construction engineering and management, 125(3), 167-175.}
 }
 }

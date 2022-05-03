@@ -18,8 +18,8 @@
 #' @export
 #' @references
 #' \describe{
-#'   \item{}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
-#'   \item{}{Gonçalves-Dosantos, J.C., García-Jurado, I., Costa, J. (2018) Sharing delay costs in Stochastic projects.}
+#'   \item{castro}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
+#'   \item{gon}{Gonçalves-Dosantos, J.C., García-Jurado, I., Costa, J. (2018) Sharing delay costs in Stochastic projects.}
 #' }
 #' @return  A delay value and solution vector.
 #' @examples

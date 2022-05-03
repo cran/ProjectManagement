@@ -26,6 +26,6 @@ early.time(prec1and2,duration=duration)
 }
 \references{
 \describe{
-  \item{}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
+  \item{burke}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
 }
 }

@@ -20,9 +20,9 @@
 #' Shapley rule distributes the delay, \eqn{d}, based on the Shapley value for TU games, see \cite{Bergantiños et al. (2018)}. Given a project problem with delays \eqn{(N,\prec,\{\bar{X}_i\}_{i\in N},\{x_i\}_{i\in N})}, its associated TU game, \eqn{(N,v)}, is \eqn{v(S)=C(D(N,\prec,(\{\bar{X}_i\}_{i\in N\backslash S},\{x_i\}_{i\in S})))} for all \eqn{S\subseteq N}, where \eqn{C} is the costs function (by default \eqn{C(D(N,\prec,y))=D(N,\prec,y)-\delta}. If the number of activities is greater than ten, the Shapley value, of the game \eqn{(N,v)}, is estimated using a unique sampling process for all players, see \cite{Castro et al. (2009)}.
 #' @references
 #' \describe{
-#'   \item{}{Bergantiños, G., Valencia-Toledo, A., & Vidal-Puga, J. (2018). Hart and Mas-Colell consistency in PERT problems. Discrete Applied Mathematics, 243, 11-20.}
-#'   \item{}{Brânzei, R., Ferrari, G., Fragnelli, V., & Tijs, S. (2002). Two approaches to the problem of sharing delay costs in joint projects. Annals of Operations Research, 109(1-4), 359-374.}
-#'   \item{}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
+#'   \item{berg}{Bergantiños, G., Valencia-Toledo, A., & Vidal-Puga, J. (2018). Hart and Mas-Colell consistency in PERT problems. Discrete Applied Mathematics, 243, 11-20.}
+#'   \item{bran}{Brânzei, R., Ferrari, G., Fragnelli, V., & Tijs, S. (2002). Two approaches to the problem of sharing delay costs in joint projects. Annals of Operations Research, 109(1-4), 359-374.}
+#'   \item{castro}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
 #' }
 #' @return  The delay value and a solution matrix.
 #' @examples

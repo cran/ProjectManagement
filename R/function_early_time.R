@@ -6,7 +6,7 @@
 #' @export
 #' @references
 #' \describe{
-#'   \item{}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
+#'   \item{burke}{Burke, R. (2013). Project management: planning and control techniques. New Jersey, USA.}
 #' }
 #' @return Early time vector.
 #' @examples

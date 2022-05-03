@@ -10,7 +10,7 @@
 #' @details The MCE method (Minimal Cost Expediting) tries to speed up the project at minimum cost. It considers that the duration of some project activities could be reduced by increasing the resources allocated to them (and thus increasing their implementation costs).
 #' @references
 #' \describe{
-#'   \item{}{Kelley Jr, J. E. (1961). Critical-path planning and scheduling: Mathematical basis. Operations research, 9(3), 296-320.}
+#'   \item{kelley}{Kelley Jr, J. E. (1961). Critical-path planning and scheduling: Mathematical basis. Operations research, 9(3), 296-320.}
 #' }
 #' @return  A solution matrices.
 #' @examples
