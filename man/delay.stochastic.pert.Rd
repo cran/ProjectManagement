@@ -44,7 +44,7 @@ This function calculates the delay of a stochastic project, once it has been car
 \details{
 Given a problem of sharing delays in a stochastic project \eqn{(N,\prec,\{X_i\}_{i\in N},\{x_i\}_{i\in N})},  such that \eqn{\{X_i\}_{i\in N}} is the random variable of activities' durations and \eqn{\{x_i\}_{i\in N}} the observed value. It is defined as \eqn{E(D(N,\prec,\{X_i\}_{i\in N}))} the expected project time, where \eqn{E} is the mathematical expectation, and \eqn{D(N,\prec,\{x_i\}_{i\in N})} the observed project time, then \eqn{d=D(N,\prec,\{X_i\}_{i\in N})-\delta}, with \eqn{\delta>0}, normally \eqn{\delta>E(D(N,\prec,\{X_i\}_{i\in N}))}, is the delay. The proportional and truncated proportional rule, see delay.pert function, can be adapted to this context by using the mean of the random variables.
 
-The Stochastic Shapley rule is based on the Shapley value for the TU game \eqn{(N,v)} where \eqn{v(S)=E(C(D(N,\prec,(\{X_i\}_{i\in N\backslash S},\{x_i\}_{i\in S})))}, for all \eqn{S\subseteq N}, where \eqn{C} is the costs function (by default \eqn{C(y)=D(N,\prec,y)-\delta}).  If the number of activities is greater than ten, the Shapley value, of the game \eqn{(N,v)}, is estimated using a unique sampling process for all players, see \cite{Castro et al. (2009)}.
+The Stochastic Shapley, \cite{Gonçalves-Dosantos et al. (2020)}, rule is based on the Shapley value for the TU game \eqn{(N,v)} where \eqn{v(S)=E(C(D(N,\prec,(\{X_i\}_{i\in N\backslash S},\{x_i\}_{i\in S})))}, for all \eqn{S\subseteq N}, where \eqn{C} is the costs function (by default \eqn{C(y)=D(N,\prec,y)-\delta}).  If the number of activities is greater than ten, the Shapley value, of the game \eqn{(N,v)}, is estimated using a unique sampling process for all players, see \cite{Castro et al. (2009)}.
 
 The Stochastic Shapley rule 2 is based on the sum of the Shapley values for the TU games \eqn{(N,v)} and \eqn{(N,w)} where \eqn{v(S)=E(C(D(N,\prec,(\{X_i\}_{i\in N\backslash S},\{x_i\}_{i\in S}))))-E(C(D(N,\prec,(\{X_i\}_{i\in N}))))} and \eqn{w(S)=E(C(D(N,\prec,(\{0_i\}_{i\in N\backslash S},\{X_i\}_{i\in S}))))}, for all \eqn{S\subseteq N}, \eqn{0_N} denotes the vector in \eqn{R^N} whose components are equal to zero and where \eqn{C} is the costs function (by default \eqn{C(y)=D(N,\prec,y)-\delta}).
 }
@@ -64,6 +64,6 @@ cost.function=NULL,compilations=1000)
 \references{
 \describe{
   \item{castro}{Castro, J., Gómez, D., & Tejada, J. (2009). Polynomial calculation of the Shapley value based on sampling. Computers & Operations Research, 36(5), 1726-1730.}
-  \item{gon}{Gonçalves-Dosantos, J.C., García-Jurado, I., Costa, J. (2018) Sharing delay costs in Stochastic projects.}
+  \item{gon}{Gonçalves-Dosantos, J.C., García-Jurado, I., Costa, J. (2020) Sharing delay costs in Stochastic scheduling problems with delays. 4OR, 18(4), 457-476}
 }
 }

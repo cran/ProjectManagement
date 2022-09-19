@@ -1,4 +1,4 @@
-134086c246edfef2a4df12cfe75fcda9 *DESCRIPTION
+8d1be9ddf9f3c9523603bb100c125e88 *DESCRIPTION
 7048d5ab8e885c03022af1a436396493 *NAMESPACE
 de3198f9c19f4c4dde329949e0b64ebd *R/ProjectManagement.R
 739818ff49d1c78cfeb6e00c4eb7eac6 *R/function_dag.R
@@ -9,14 +9,14 @@ bc157bffa0c7f7c0eb7b7deffbc440d9 *R/function_mce.R
 698bb69d715463e417f2574b9aac3b5f *R/function_pert_calendario.R
 9b320f9d24465428c100a08e3013add3 *R/function_pert_demora.R
 34223f492a7717dbf512ee316cb7e820 *R/function_pert_estocastico.R
-9431171a88c52af933cb3052f2609c51 *R/function_pert_estocastico_demora.R
+4faae08f4726e7c3b73320b25d22bb21 *R/function_pert_estocastico_demora.R
 d24ee1e2e63871b2807df023e2b2cbd0 *R/function_rebuild.R
 52cc72a899d95f7e4391119ec28245d2 *R/function_resource_allocation.R
 c9cc8115b06a24c9208ba7042b262efe *R/function_resource_leveling.R
 8898f24e3e692e8c680ea1994d1695db *man/ProjectManagement-package.Rd
 1a51270b4d702403619051772beaf438 *man/dag.plot.Rd
 e474ffdeb4a892302c116cba468ffff2 *man/delay.pert.Rd
-c530f8cedeeac99cb1c73775522a0fd7 *man/delay.stochastic.pert.Rd
+69120cf51c4f9c323fd3f407652621db *man/delay.stochastic.pert.Rd
 6334b20315abc1997b58600b3382fd14 *man/early.time.Rd
 5e9a08e63219d8aae74b5d3200207bb8 *man/last.time.Rd
 0ff0435422fe972ba2aa0bbf58175d8c *man/levelling.resources.Rd
