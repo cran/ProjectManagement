@@ -380,41 +380,41 @@ delay.stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribu
 
   {
     if(is.null(cost.function)==FALSE){
-      z<-as.matrix(DefineGame(n,v1)$Lex)
-      z<-as.vector(z)
-      coalitions <- set.func(c(0, z))
+      #z<-as.matrix(DefineGame(n,v1)$Lex)
+      #z<-as.vector(z)
+      coalitions <- set.func(c(0, v1))
       sh <- Shapley.value(coalitions)
 
 
       V1<-v1-Duration.project
-      z<-as.matrix(DefineGame(n,V1)$Lex)
-      z<-as.vector(z)
-      coalitions<- set.func(c(0, z))
+      #z<-as.matrix(DefineGame(n,V1)$Lex)
+      #z<-as.vector(z)
+      coalitions<- set.func(c(0, V1))
       sh1<-Shapley.value(coalitions)
 
 
-      z<-as.matrix(DefineGame(n,w1)$Lex)
-      z<-as.vector(z)
-      coalitions<- set.func(c(0, z))
+      #z<-as.matrix(DefineGame(n,w1)$Lex)
+      #z<-as.vector(z)
+      coalitions<- set.func(c(0, w1))
       sh2<-Shapley.value(coalitions)
       SOLUTION<-(sh1+sh2)
     }
     else{
 
-      z<-as.matrix(DefineGame(n,v)$Lex)
-      z<-as.vector(z)
-      coalitions <- set.func(c(0, z))
+      #z<-as.matrix(DefineGame(n,v)$Lex)
+      #z<-as.vector(z)
+      coalitions <- set.func(c(0, v))
       sh <- Shapley.value(coalitions)
 
       V1<-v-Duration.project
-      z<-as.matrix(DefineGame(n,V1)$Lex)
-      z<-as.vector(z)
-      coalitions<- set.func(c(0, z))
+      #z<-as.matrix(DefineGame(n,V1)$Lex)
+      #z<-as.vector(z)
+      coalitions<- set.func(c(0, V1))
       sh1<-Shapley.value(coalitions)
 
-      z<-as.matrix(DefineGame(n,w)$Lex)
-      z<-as.vector(z)
-      coalitions<- set.func(c(0, z))
+      #z<-as.matrix(DefineGame(n,w)$Lex)
+      #z<-as.vector(z)
+      coalitions<- set.func(c(0, w))
       sh2<-Shapley.value(coalitions)
       SOLUTION<-(sh1+sh2)
     }

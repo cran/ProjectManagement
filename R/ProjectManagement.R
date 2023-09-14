@@ -15,10 +15,9 @@
 ##' @title Management of Deterministic and Stochastic Projects
 ##'
 ##' @import plotly
-##' @import GameTheory
 ##' @import lpSolveAPI
 ##'
-##' @importFrom  graphics hist legend lines plot points segments axis
+##' @importFrom graphics hist legend lines plot points segments axis
 ##' @importFrom stats density dnorm ecdf quantile rexp rnorm runif sd rbeta rbinom rchisq rf rgamma rgeom rhyper rpois rt rweibull
 ##' @importFrom utils combn
 ##' @importFrom triangle rtriangle

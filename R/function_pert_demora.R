@@ -167,15 +167,15 @@ delay.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),observed.d
 
         {
         if(is.null(cost.function)==FALSE){
-          z<-as.matrix(DefineGame(n,w)$Lex)
-          z<-as.vector(z)
-          coalitions <- set.func(c(0, z))
+          #z<-as.matrix(DefineGame(n,w)$Lex)
+          #z<-as.vector(z)
+          coalitions <- set.func(c(0, w))
           sh <- Shapley.value(coalitions)
         }
           else{
-            z<-as.matrix(DefineGame(n,v)$Lex)
-            z<-as.vector(z)
-            coalitions <- set.func(c(0, z))
+            #z<-as.matrix(DefineGame(n,v)$Lex)
+            #z<-as.vector(z)
+            coalitions <- set.func(c(0, v))
             sh <- Shapley.value(coalitions)
           }
         }
