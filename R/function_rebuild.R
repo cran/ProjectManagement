@@ -12,10 +12,10 @@
 #' All these precedences can be written only as type 1. It should be noted that precedence type 1 implies type 2, and type 2 implies type 4. On the other hand, precedence type 1 implies type 3, and type 3 implies type 4.
 #' @return A list containing:
 #' \itemize{
-#' \item{Precedence: }{ precedence matrix.}
-#' \item{Type 2: }{ activities related to type 2 precedence.}
-#' \item{Type 3: }{ activities related to type 3 precedence.}
-#' \item{Type 4: }{ activities related to type 4 precedence.}
+#' \item Precedence: precedence matrix.
+#' \item Type 2: activities related to type 2 precedence.
+#' \item Type 3: activities related to type 3 precedence.
+#' \item Type 4: activities related to type 4 precedence.
 #' }
 #' @examples
 #'

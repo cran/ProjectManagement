@@ -16,12 +16,12 @@
 ##'
 ##' @import plotly
 ##' @import lpSolveAPI
+##' @import TUvalues
 ##'
 ##' @importFrom graphics hist legend lines plot points segments axis
 ##' @importFrom stats density dnorm ecdf quantile rexp rnorm runif sd rbeta rbinom rchisq rf rgamma rgeom rhyper rpois rt rweibull
 ##' @importFrom utils combn
 ##' @importFrom triangle rtriangle
-##' @importFrom kappalab set.func Shapley.value normalize
 ##' @importFrom igraph graph_from_adjacency_matrix layout.kamada.kawai
 ##'
 NULL

@@ -5,8 +5,8 @@
 #' @export
 #' @return A list containing:
 #' \itemize{
-#' \item{Precedence: }{ ordered precedence matrix.}
-#' \item{Order: }{ new activities values.}
+#' \item Precedence: ordered precedence matrix.
+#' \item Order: new activities values.
 #' }
 #' @examples
 #' prec1and2<-matrix(c(0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0),nrow=5,ncol=5,byrow=TRUE)

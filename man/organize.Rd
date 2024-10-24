@@ -14,8 +14,8 @@ organize(prec1and2 = matrix(0), prec3and4 = matrix(0))
 \value{
 A list containing:
 \itemize{
-\item{Precedence: }{ ordered precedence matrix.}
-\item{Order: }{ new activities values.}
+\item Precedence: ordered precedence matrix.
+\item Order: new activities values.
 }
 }
 \description{

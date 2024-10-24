@@ -14,10 +14,10 @@ rebuild(prec1and2 = matrix(0), prec3and4 = matrix(0))
 \value{
 A list containing:
 \itemize{
-\item{Precedence: }{ precedence matrix.}
-\item{Type 2: }{ activities related to type 2 precedence.}
-\item{Type 3: }{ activities related to type 3 precedence.}
-\item{Type 4: }{ activities related to type 4 precedence.}
+\item Precedence: precedence matrix.
+\item Type 2: activities related to type 2 precedence.
+\item Type 3: activities related to type 3 precedence.
+\item Type 4: activities related to type 4 precedence.
 }
 }
 \description{

@@ -137,49 +137,43 @@ delay.pert<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),observed.d
           sh<-sh/contador
         }
       }
-      else{
-        v<-numeric(2^n-1)
-        v[1:n]<-SD[1:n]
-        continue<-"Y"
-        p<-n+1
+      else {
+        v <- numeric(2^n - 1)
+        v[1:n] <- SD[1:n]
+        continue <- "Y"
+        p <- n + 1
+        coa<-coalitions(n)$Classic[-1]
 
-        for(j in 2:n){
-          con<-as.matrix(combn(c(1:n),j))
-          for(z in 1:dim(con)[2]){
+        for (j in (n+1):length(coa)) {
 
-            duracion1<-duration
-            duracion1[con[,z]]<-observed.duration[con[,z]]
-            if(nn>0){
-            for(i in 1:length(iii)) {
-              tiempo.early[iii[i]]=max(tiempo.early[prec[i,]]+duracion1[prec[i,]])
+
+          z<-as.numeric(unlist(strsplit(coalitions(n)$Classic[-1][j], ",")))
+
+
+          duracion1 <- duration
+          duracion1[z] <- observed.duration[z]
+          if (nn > 0) {
+            for (i in 1:length(iii)) {
+              tiempo.early[iii[i]] = max(tiempo.early[prec[i,]] + duracion1[prec[i, ]])
             }
-            }
-            if(is.null(cost.function)==FALSE){w[p]<-cost.function(max(tiempo.early+duracion1))}
-            v[p]<-max(tiempo.early+duracion1)
-            p<-p+1
           }
+          if (is.null(cost.function) == FALSE) {
+            w[p] <- cost.function(max(tiempo.early + duracion1))
+          }
+          v[p] <- max(tiempo.early + duracion1)
+          p <- p + 1
         }
-
-        v<-v-tiempo
-
-        #sh<-c(shapleyValue(n,v=v)$value)
-
-
+        v <- v - tiempo
         {
-        if(is.null(cost.function)==FALSE){
-          #z<-as.matrix(DefineGame(n,w)$Lex)
-          #z<-as.vector(z)
-          coalitions <- set.func(c(0, w))
-          sh <- Shapley.value(coalitions)
-        }
-          else{
-            #z<-as.matrix(DefineGame(n,v)$Lex)
-            #z<-as.vector(z)
-            coalitions <- set.func(c(0, v))
-            sh <- Shapley.value(coalitions)
+          if (is.null(cost.function) == FALSE) {
+
+            sh <-shapley(w,method="exact")
+          }
+          else {
+            sh <-shapley(v,method="exact")
           }
         }
-        }
+      }
     }
 
 

@@ -331,96 +331,69 @@ delay.stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribu
       }
     }
 
-    else{
 
-    continue<-"Y"
-  tiempo.computacion<-numeric(compilations)
-  p<-n+1
-
-  for(j in 2:n){
-    con<-as.matrix(combn(c(1:n),j))
-
-    for(z in 1:dim(con)[2]){
-
-      for(i in 1:compilations){
-        duracion1<-duration[i,]
-        duracion1[con[,z]]<-observed.duration[con[,z]]
-        duracion2<-duration[i,]
-        duracion2[-con[,z]]<-0
-        if(nn>0){
-        for(t in 1:nn) {
-          tiempo.early[iii[t]]=max(tiempo.early[prec[t,]]+duracion1[prec[t,]])
-          tiempo.early2[iii[t]]=max(tiempo.early2[prec[t,]]+duracion2[prec[t,]])
+    else {
+      continue <- "Y"
+      tiempo.computacion <- numeric(compilations)
+      p <- n + 1
+      coa<-coalitions(n)$Classic[-1]
+      for (j in (n+1):length(coa)) {
+        z<-as.numeric(unlist(strsplit(coalitions(n)$Classic[-1][j], ",")))
+        for (i in 1:compilations) {
+          duracion1 <- duration[i, ]
+          duracion1[z] <- observed.duration[z]
+          duracion2 <- duration[i, ]
+          duracion2[-z] <- 0
+          if (nn > 0) {
+            for (t in 1:nn) {
+              tiempo.early[iii[t]] = max(tiempo.early[prec[t,]] + duracion1[prec[t, ]])
+              tiempo.early2[iii[t]] = max(tiempo.early2[prec[t,]] + duracion2[prec[t, ]])
+            }
+          }
+          tiempo.computacion[i] <- max(tiempo.early +duracion1)
+          tiempo.computacion2[i] <- max(tiempo.early2 + duracion2)
+          if (is.null(cost.function) == FALSE) {
+            tiempo.computacion[i] <- cost.function(tiempo.computacion[i])
+            tiempo.computacion2[i] <- cost.function(tiempo.computacion2[i])
+          }
         }
+        {
+          if (is.null(cost.function) == FALSE) {
+            v1[p] <- mean(tiempo.computacion)
+            w1[p] <- mean(tiempo.computacion2)
+          }
+          else {
+            v[p] <- mean(pmax(tiempo.computacion - delta, 0))
+            w[p] <- mean(pmax(tiempo.computacion2 - delta, 0))
+          }
         }
-        tiempo.computacion[i]<-max(tiempo.early+duracion1)
-        tiempo.computacion2[i]<-max(tiempo.early2+duracion2)
-        if(is.null(cost.function)==FALSE){
-          tiempo.computacion[i]<-cost.function(tiempo.computacion[i])
-          tiempo.computacion2[i]<-cost.function(tiempo.computacion2[i])
-        }
+        p <- p + 1
       }
-
       {
-      if(is.null(cost.function)==FALSE){
-        v1[p]<-mean(tiempo.computacion)
-        w1[p]<-mean(tiempo.computacion2)
-      }
-        else{
-          v[p]<-mean(pmax(tiempo.computacion-delta,0))
-          w[p]<-mean(pmax(tiempo.computacion2-delta,0))
+        if (is.null(cost.function) == FALSE) {
+
+
+          sh <-shapley(v1,method="exact")
+
+          V1 <- v1 - Duration.project
+          sh1 <-shapley(V1,method="exact")
+
+
+          sh2 <-shapley(w1,method="exact")
+
+          SOLUTION <- (sh1 + sh2)
+        }
+        else {
+
+          sh <-shapley(v,method="exact")
+
+          V1 <- v - Duration.project
+          sh1 <-shapley(V1,method="exact")
+          sh2 <-shapley(w,method="exact")
+          SOLUTION <- (sh1 + sh2)
         }
       }
-      p<-p+1
     }
-  }
-
-
-
-
-  {
-    if(is.null(cost.function)==FALSE){
-      #z<-as.matrix(DefineGame(n,v1)$Lex)
-      #z<-as.vector(z)
-      coalitions <- set.func(c(0, v1))
-      sh <- Shapley.value(coalitions)
-
-
-      V1<-v1-Duration.project
-      #z<-as.matrix(DefineGame(n,V1)$Lex)
-      #z<-as.vector(z)
-      coalitions<- set.func(c(0, V1))
-      sh1<-Shapley.value(coalitions)
-
-
-      #z<-as.matrix(DefineGame(n,w1)$Lex)
-      #z<-as.vector(z)
-      coalitions<- set.func(c(0, w1))
-      sh2<-Shapley.value(coalitions)
-      SOLUTION<-(sh1+sh2)
-    }
-    else{
-
-      #z<-as.matrix(DefineGame(n,v)$Lex)
-      #z<-as.vector(z)
-      coalitions <- set.func(c(0, v))
-      sh <- Shapley.value(coalitions)
-
-      V1<-v-Duration.project
-      #z<-as.matrix(DefineGame(n,V1)$Lex)
-      #z<-as.vector(z)
-      coalitions<- set.func(c(0, V1))
-      sh1<-Shapley.value(coalitions)
-
-      #z<-as.matrix(DefineGame(n,w)$Lex)
-      #z<-as.vector(z)
-      coalitions<- set.func(c(0, w))
-      sh2<-Shapley.value(coalitions)
-      SOLUTION<-(sh1+sh2)
-    }
-  }
-
-}
 
 
 
