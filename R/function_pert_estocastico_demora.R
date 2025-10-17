@@ -60,6 +60,9 @@ delay.stochastic.pert<-function(prec1and2=matrix(0),prec3and4=matrix(0),distribu
   durations.means<-numeric()
   Prop<-numeric()
   TProp<-numeric()
+  sh<-numeric()
+  sh1<-numeric()
+  sh2<-numeric()
   ii<-as.logical(colSums(precedence))
   iii<-activities[ii]
   nn<-length(iii)

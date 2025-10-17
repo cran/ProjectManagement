@@ -57,10 +57,15 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
   durations.means<-numeric()
   Prop<-numeric()
   TProp<-numeric()
+  sh<-numeric()
+  sh1<-numeric()
+  sh2<-numeric()
   ii<-as.logical(colSums(precedence))
   iii<-activities[ii]
   nn<-length(iii)
-
+  unionO <- lapply(union, function(x) or2[x])
+  
+  
   if(nn>0){
     prec<-matrix(0,nrow=nn,ncol=n-1)
     for(j in 1:nn){
@@ -252,6 +257,9 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
       }
     }
   }
+  
+  
+  
   {
     if (length(activities) > 10) {
       cat("Owen need some time to compute a", n, "player game \n")
@@ -260,7 +268,7 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
       if (continue == "Y") {
         cont <- 1
         while (cont <= 1000) {
-          x <- unlist(lapply(sample(union), function(x) if (length(x) == 1) x else sample(x)))
+          x <- unlist(lapply(sample(unionO), function(x) if (length(x) == 1) x else sample(x)))
           for (i in 1:(n - 1)) {
             for (j in 1:1000) {
               duracion1 <- duration[j, ]
@@ -362,23 +370,23 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
         if (is.null(cost.function) == FALSE) {
 
 
-          sh <-owen(v1,union,method="exact")
+          sh <-owen(v1,unionO,method="exact")
 
           V1 <- v1 - Duration.project
-          sh1 <-owen(V1,union,method="exact")
+          sh1 <-owen(V1,unionO,method="exact")
 
 
-          sh2 <-owen(w1,union,method="exact")
+          sh2 <-owen(w1,unionO,method="exact")
 
           SOLUTION <- (sh1 + sh2)
         }
         else {
 
-          sh <-owen(v,union,method="exact")
+          sh <-owen(v,unionO,method="exact")
 
           V1 <- v - Duration.project
-          sh1 <-owen(V1,union,method="exact")
-          sh2 <-owen(w,union,method="exact")
+          sh1 <-owen(V1,unionO,method="exact")
+          sh2 <-owen(w,unionO,method="exact")
           SOLUTION <- (sh1 + sh2)
         }
       }

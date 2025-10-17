@@ -43,7 +43,11 @@ delay.pert.unions<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),uni
   SD<-numeric(length(activities))
   w<-numeric(2^n-1)
   tiempo.early<-rep(0,n)
-
+  unionO <- lapply(union, function(x) or2[x])
+  
+  
+  
+  
   ii<-as.logical(colSums(precedence))
   iii<-activities[ii]
   nn<-length(iii)
@@ -106,7 +110,7 @@ delay.pert.unions<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),uni
         contador <- 0
         sh <- numeric(length(activities))
         while (contador <= 1000) {
-          x <- unlist(lapply(sample(union), function(x) if (length(x) == 1) x else sample(x)))
+          x <- unlist(lapply(sample(unionO), function(x) if (length(x) == 1) x else sample(x)))
           for (i in 1:n) {
             duracion1 <- duration
             duracion1[x[1:i]] <- observed.duration[x[1:i]]
@@ -162,10 +166,10 @@ delay.pert.unions<-function(duration,prec1and2=matrix(0),prec3and4=matrix(0),uni
       {
         if (is.null(cost.function) == FALSE) {
 
-          sh <-owen(w,union,method="exact")
+          sh <-owen(w,unionO,method="exact")
         }
         else {
-          sh <-owen(v,union,method="exact")
+          sh <-owen(v,unionO,method="exact")
         }
       }
     }
