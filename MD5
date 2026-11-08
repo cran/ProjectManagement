@@ -1,6 +1,6 @@
-60a27b3ce2e0df2a6503cea99aa5af30 *DESCRIPTION
-77bbb2e1d2ccc2c8570130913e05920a *NAMESPACE
-057eeb5e7bbcd9f4476f1228fdd0b4cc *R/ProjectManagement.R
+60fb4f5f0957bfa39ed052f7290bd595 *DESCRIPTION
+0450db63986ee496f257af12c868724d *NAMESPACE
+015dbc436df77b4d923b488ea90e2aba *R/ProjectManagement.R
 739818ff49d1c78cfeb6e00c4eb7eac6 *R/function_dag.R
 d6b0ae27c9afb9d09e364b7bc54f351f *R/function_early_time.R
 a18320a58d09d888a5bfeab2c4b57d7b *R/function_last_time.R
@@ -11,11 +11,11 @@ bc157bffa0c7f7c0eb7b7deffbc440d9 *R/function_mce.R
 0ff0a5d54b4ac5fe079637ca5cc3f60f *R/function_pert_demora_unions.R
 34223f492a7717dbf512ee316cb7e820 *R/function_pert_estocastico.R
 73100d50de571dad8f1db80db359fbdf *R/function_pert_estocastico_demora.R
-8f0368912c07a46fd843d9f3508a31d6 *R/function_pert_estocastico_demora_uniones.R
+864686e1eb6d41ee9912c56fd91d8347 *R/function_pert_estocastico_demora_uniones.R
 4f52628556f8234aa3c51195afcd35a8 *R/function_rebuild.R
 52cc72a899d95f7e4391119ec28245d2 *R/function_resource_allocation.R
 c9cc8115b06a24c9208ba7042b262efe *R/function_resource_leveling.R
-acd242010aee63a24a786365be82d926 *man/ProjectManagement-package.Rd
+e1ce1546eb2a23d517826d964a49d1a1 *man/ProjectManagement-package.Rd
 1a51270b4d702403619051772beaf438 *man/dag.plot.Rd
 e474ffdeb4a892302c116cba468ffff2 *man/delay.pert.Rd
 22958231a2cd6603157dee9d6b0ea744 *man/delay.pert.unions.Rd

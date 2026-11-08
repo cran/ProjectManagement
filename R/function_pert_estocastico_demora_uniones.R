@@ -57,15 +57,15 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
   durations.means<-numeric()
   Prop<-numeric()
   TProp<-numeric()
-  sh<-numeric()
-  sh1<-numeric()
-  sh2<-numeric()
+  sh<-numeric(n)
+  sh1<-numeric(n)
+  sh2<-numeric(n)
   ii<-as.logical(colSums(precedence))
   iii<-activities[ii]
   nn<-length(iii)
-  unionO <- lapply(union, function(x) or2[x])
-  
-  
+  unionO <- lapply(union, function(x) or1[x])
+
+
   if(nn>0){
     prec<-matrix(0,nrow=nn,ncol=n-1)
     for(j in 1:nn){
@@ -102,46 +102,46 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
       }
       else if(distribution[j]=="EMPIRICAL"){
         duration[,j]<-  rnorm(compilations,sample(values[j,],size=compilations,replace=TRUE),density(values[j,])$bw)
-        duration.means[j]<-mean(values[j,])
+        durations.means[j]<-mean(values[j,])
       }
       else if(distribution[j]=="T-STUDENT"){
         duration[,j]<-rt(compilations,df=values[j,1],ncp=values[j,2])
-        duration.means[j]<-mean(duration[,j])
+        durations.means[j]<-mean(duration[,j])
       }
       else if(distribution[j]=="FDISTRIBUTION"){
         duration[,j]<-rf(compilations,df1 =values[j,1],df2 =values[j,2],ncp=values[j,3])
         {
-          if(values[j,2]>2){duration.means[j]<-values[j,1]/(values[j,2]-2)}
-          else{duration.means[j]<-mean(duration[,j])}
+          if(values[j,2]>2){durations.means[j]<-values[j,1]/(values[j,2]-2)}
+          else{durations.means[j]<-mean(duration[,j])}
         }
       }
       else if(distribution[j]=="CHI-SQUARED"){
         duration[,j]<-rchisq(compilations,df =values[j,1],ncp=values[j,2])
-        duration.means[j]<-values[j,1]
+        durations.means[j]<-values[j,1]
       }
       else if(distribution[j]=="GAMMA"){
         duration[,j]<-rgamma(compilations,shape =values[j,1],rate =values[j,2],scale=values[j,3])
-        duration.means[j]<-values[j,1]*values[j,3]
+        durations.means[j]<-values[j,1]*values[j,3]
       }
       else if(distribution[j]=="WEIBULL"){
         duration[,j]<-rweibull(compilations,shape =values[j,1],scale=values[j,2])
-        duration.means[j]<-mean(duration[,j])
+        durations.means[j]<-mean(duration[,j])
       }
       else if(distribution[j]=="BINOMIAL"){
         duration[,j]<-rbinom(compilations,size =values[j,1],prob=values[j,2])
-        duration.means[j]<-values[j,1]*values[j,2]
+        durations.means[j]<-values[j,1]*values[j,2]
       }
       else if(distribution[j]=="POISSON"){
         duration[,j]<-rpois(compilations,lambda =values[j,1])
-        duration.means[j]<-values[j,1]
+        durations.means[j]<-values[j,1]
       }
       else if(distribution[j]=="GEOMETRIC"){
         duration[,j]<-rgeom(compilations,prob=values[j,1])
-        duration.means[j]<-1/values[j,1]
+        durations.means[j]<-1/values[j,1]
       }
       else if(distribution[j]=="HYPERGEOMETRIC"){
         duration[,j]<-rhyper(compilations,m=values[j,1],n=values[j,2],k=values[j,3])
-        duration.means[j]<-values[j,3]*(values[j,1]/(values[j,1]+values[j,2]))
+        durations.means[j]<-values[j,3]*(values[j,1]/(values[j,1]+values[j,2]))
       }
     }
   }
@@ -257,37 +257,45 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
       }
     }
   }
-  
-  
-  
+
+
+
   {
     if (length(activities) > 10) {
       cat("Owen need some time to compute a", n, "player game \n")
       cat("Continue calculation of the Owen value based on sampling? (Y = Yes, N = No) \n")
       continue <- scan(what = "character", n = 1)
+
       if (continue == "Y") {
         cont <- 1
+
         while (cont <= 1000) {
           x <- unlist(lapply(sample(unionO), function(x) if (length(x) == 1) x else sample(x)))
+
           for (i in 1:(n - 1)) {
-            for (j in 1:1000) {
+            for (j in 1:compilations) {
               duracion1 <- duration[j, ]
               duracion1[x[1:i]] <- observed.duration[x[1:i]]
+
               duracion2 <- duration[j, ]
               duracion2[-x[1:i]] <- 0
+
               if (nn > 0) {
                 for (t in 1:nn) {
-                  tiempo.early[iii[t]] = max(tiempo.early[prec[t,]] + duration1[prec[t, ]])
-                  tiempo.early2[iii[t]] = max(tiempo.early2[prec[t, ]] + duracion2[prec[t, ]])
+                  tiempo.early[iii[t]] <- max(tiempo.early[prec[t,]] + duracion1[prec[t,]])
+                  tiempo.early2[iii[t]] <- max(tiempo.early2[prec[t,]] + duracion2[prec[t,]])
                 }
               }
+
               tiempo.computacion[j] <- max(tiempo.early + duracion1)
               tiempo.computacion2[j] <- max(tiempo.early2 + duracion2)
+
               if (is.null(cost.function) == FALSE) {
-                tiempo.computacion[i] <- cost.function(tiempo.computacion[i])
-                tiempo.computacion2[j] <- cost.function(tiempo.computacion2[i])
+                tiempo.computacion[j] <- cost.function(tiempo.computacion[j])
+                tiempo.computacion2[j] <- cost.function(tiempo.computacion2[j])
               }
             }
+
             {
               if (is.null(cost.function) == FALSE) {
                 tiempo2[i] <- mean(tiempo.computacion)
@@ -299,43 +307,51 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
               }
             }
           }
+
           if (nn > 0) {
             for (t in 1:nn) {
-              tiempo.early[iii[t]] = max(tiempo.early[prec[t,]] + observed.duration[prec[t, ]])
+              tiempo.early[iii[t]] <- max(tiempo.early[prec[t,]] + observed.duration[prec[t,]])
             }
           }
+
           {
             if (is.null(cost.function) == FALSE) {
-              tiempo2[n] <- mean(cost.function(max(tiempo.early + duracion1)))
+              tiempo2[n] <- cost.function(duracion.total.T)
             }
             else {
-              tiempo2[n] <- mean(max(tiempo.early + duracion1) -
-                                   delta)
+              tiempo2[n] <- max(duracion.total.T - delta, 0)
             }
           }
+
           tiempo4[n] <- Duration.project
           tiempo3 <- tiempo2 - Duration.project
-          sh[x[1]] <- tiempo2[1]
-          sh[x[2:n]] <- tiempo2[2:n] - tiempo2[1:(n -
-                                                    1)]
-          sh1[x[1]] <- tiempo3[1]
-          sh1[x[2:n]] <- tiempo3[2:n] - tiempo3[1:(n -
-                                                     1)]
-          sh2[x[1]] <- tiempo4[1]
-          sh2[x[2:n]] <- tiempo4[2:n] - tiempo4[1:(n -
-                                                     1)]
+
+          sh[x[1]] <- sh[x[1]] + tiempo2[1]
+          sh[x[2:n]] <- sh[x[2:n]] + tiempo2[2:n] - tiempo2[1:(n - 1)]
+
+          sh1[x[1]] <- sh1[x[1]] + tiempo3[1]
+          sh1[x[2:n]] <- sh1[x[2:n]] + tiempo3[2:n] - tiempo3[1:(n - 1)]
+
+          sh2[x[1]] <- sh2[x[1]] + tiempo4[1]
+          sh2[x[2:n]] <- sh2[x[2:n]] + tiempo4[2:n] - tiempo4[1:(n - 1)]
+
           cont <- cont + 1
         }
-        SOLUTION <- (sh1 + sh2)
+
+        sh <- sh / 1000
+        sh1 <- sh1 / 1000
+        sh2 <- sh2 / 1000
+
+        SOLUTION <- sh1 + sh2
       }
     }
     else {
       continue <- "Y"
       tiempo.computacion <- numeric(compilations)
       p <- n + 1
-      coa<-coalitions(n)$Classic[-1]
-      for (j in (n+1):length(coa)) {
-        z<-as.numeric(unlist(strsplit(coalitions(n)$Classic[-1][j], ",")))
+      coa <- coalitions(n)$Classic[-1]
+      for (j in (n + 1):length(coa)) {
+        z <- as.numeric(unlist(strsplit(coa[j], ",")))
         for (i in 1:compilations) {
           duracion1 <- duration[i, ]
           duracion1[z] <- observed.duration[z]
@@ -343,52 +359,40 @@ delay.stochastic.pert.unions<-function(prec1and2=matrix(0),prec3and4=matrix(0),u
           duracion2[-z] <- 0
           if (nn > 0) {
             for (t in 1:nn) {
-              tiempo.early[iii[t]] = max(tiempo.early[prec[t,]] + duracion1[prec[t, ]])
-              tiempo.early2[iii[t]] = max(tiempo.early2[prec[t,]] + duracion2[prec[t, ]])
+              tiempo.early[iii[t]] <- max(tiempo.early[prec[t,]] + duracion1[prec[t,]])
+              tiempo.early2[iii[t]] <- max(tiempo.early2[prec[t,]] + duracion2[prec[t,]])
             }
           }
-          tiempo.computacion[i] <- max(tiempo.early +duracion1)
+          tiempo.computacion[i] <- max(tiempo.early + duracion1)
           tiempo.computacion2[i] <- max(tiempo.early2 + duracion2)
           if (is.null(cost.function) == FALSE) {
             tiempo.computacion[i] <- cost.function(tiempo.computacion[i])
             tiempo.computacion2[i] <- cost.function(tiempo.computacion2[i])
           }
         }
-        {
-          if (is.null(cost.function) == FALSE) {
-            v1[p] <- mean(tiempo.computacion)
-            w1[p] <- mean(tiempo.computacion2)
-          }
-          else {
-            v[p] <- mean(pmax(tiempo.computacion - delta, 0))
-            w[p] <- mean(pmax(tiempo.computacion2 - delta, 0))
-          }
+        if (is.null(cost.function) == FALSE) {
+          v1[p] <- mean(tiempo.computacion)
+          w1[p] <- mean(tiempo.computacion2)
+        }
+        else {
+          v[p] <- mean(pmax(tiempo.computacion - delta, 0))
+          w[p] <- mean(pmax(tiempo.computacion2 - delta, 0))
         }
         p <- p + 1
       }
-      {
-        if (is.null(cost.function) == FALSE) {
-
-
-          sh <-owen(v1,unionO,method="exact")
-
-          V1 <- v1 - Duration.project
-          sh1 <-owen(V1,unionO,method="exact")
-
-
-          sh2 <-owen(w1,unionO,method="exact")
-
-          SOLUTION <- (sh1 + sh2)
-        }
-        else {
-
-          sh <-owen(v,unionO,method="exact")
-
-          V1 <- v - Duration.project
-          sh1 <-owen(V1,unionO,method="exact")
-          sh2 <-owen(w,unionO,method="exact")
-          SOLUTION <- (sh1 + sh2)
-        }
+      if (is.null(cost.function) == FALSE) {
+        sh <- owen(v1, unionO, method = "exact")
+        V1 <- v1 - Duration.project
+        sh1 <- owen(V1, unionO, method = "exact")
+        sh2 <- owen(w1, unionO, method = "exact")
+        SOLUTION <- sh1 + sh2
+      }
+      else {
+        sh <- owen(v, unionO, method = "exact")
+        V1 <- v - Duration.project
+        sh1 <- owen(V1, unionO, method = "exact")
+        sh2 <- owen(w, unionO, method = "exact")
+        SOLUTION <- sh1 + sh2
       }
     }
     {

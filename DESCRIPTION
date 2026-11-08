@@ -1,8 +1,8 @@
 Package: ProjectManagement
 Type: Package
 Title: Management of Deterministic and Stochastic Projects
-Date: 2025-10-17
-Version: 2.1.4
+Date: 2026-11-04
+Version: 2.1.7
 Authors@R: c(
       person("Juan Carlos","Gonçalves Dosantos",role=c("aut","cre"), email="juan.carlos.goncalves@udc.es"),
 			person("Ignacio","García Jurado",role=c("aut")),
@@ -17,8 +17,8 @@ Encoding: UTF-8
 Author: Juan Carlos Gonçalves Dosantos [aut, cre],
   Ignacio García Jurado [aut],
   Julián Costa Bouzas [aut]
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.1.1
 NeedsCompilation: no
-Packaged: 2025-10-17 15:10:41 UTC; Juan Carlos
+Packaged: 2026-11-04 11:57:40 UTC; Juan Carlos
 Repository: CRAN
-Date/Publication: 2025-10-17 15:20:02 UTC
+Date/Publication: 2026-11-08 00:30:09 UTC

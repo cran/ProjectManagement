@@ -8,6 +8,13 @@
 ##'
 ##' @title Management of Deterministic and Stochastic Projects
 ##'
+##' @section Acknowledgements:
+##' This research has been partially supported by Grants
+##' PID2021-124030NB-C31 and PID2025-170122NB-C32
+##' from MICINN, Spain, and the European Regional
+##' Development Fund (ERDF), "A way to make Europe",
+##' European Union.
+##'
 ##' @import plotly
 ##' @import lpSolveAPI
 ##' @import TUvalues

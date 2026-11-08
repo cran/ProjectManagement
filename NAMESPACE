@@ -17,32 +17,38 @@ export(stochastic.pert)
 import(TUvalues)
 import(lpSolveAPI)
 import(plotly)
-importFrom(graphics,axis)
-importFrom(graphics,hist)
-importFrom(graphics,legend)
-importFrom(graphics,lines)
-importFrom(graphics,plot)
-importFrom(graphics,points)
-importFrom(graphics,segments)
-importFrom(igraph,graph_from_adjacency_matrix)
-importFrom(igraph,layout.kamada.kawai)
-importFrom(stats,density)
-importFrom(stats,dnorm)
-importFrom(stats,ecdf)
-importFrom(stats,quantile)
-importFrom(stats,rbeta)
-importFrom(stats,rbinom)
-importFrom(stats,rchisq)
-importFrom(stats,rexp)
-importFrom(stats,rf)
-importFrom(stats,rgamma)
-importFrom(stats,rgeom)
-importFrom(stats,rhyper)
-importFrom(stats,rnorm)
-importFrom(stats,rpois)
-importFrom(stats,rt)
-importFrom(stats,runif)
-importFrom(stats,rweibull)
-importFrom(stats,sd)
+importFrom(graphics,
+  axis,
+  hist,
+  legend,
+  lines,
+  plot,
+  points,
+  segments
+)
+importFrom(igraph,
+  graph_from_adjacency_matrix,
+  layout.kamada.kawai
+)
+importFrom(stats,
+  density,
+  dnorm,
+  ecdf,
+  quantile,
+  rbeta,
+  rbinom,
+  rchisq,
+  rexp,
+  rf,
+  rgamma,
+  rgeom,
+  rhyper,
+  rnorm,
+  rpois,
+  rt,
+  runif,
+  rweibull,
+  sd
+)
 importFrom(triangle,rtriangle)
 importFrom(utils,combn)
